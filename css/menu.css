@@ -1,0 +1,119 @@
+@import url('http://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,700,700italic,900');
+@font-face { font-family: Nevada; src: url('../assets/fonts/SANevada.otf'); } 
+@font-face { font-family: Quicksand; src: url('../assets/fonts/Quicksand-Bold.ttf'); } 
+
+/* CATEGORIES */
+
+.categories {
+	cursor: pointer;
+	border: 1px solid #000;
+	border-radius: 20px;
+	box-shadow: 0 3px 5px 3px #ccc;
+	transition: 0.35s ease;
+}
+.categories:hover {
+	background: #000;
+}
+.categories:hover > .category-label {
+	color: #fff;
+	text-shadow: 3px 4px #444;
+}
+.category-label {
+	font-family: MoonImpact;
+	font-size: 1.7em;
+	color: #000;
+	text-shadow: 3px 4px #ccc;
+	white-space: nowrap;
+	cursor: pointer;
+	transition: 0.35s ease;
+}
+input[name="radio-categories"] {
+	display: none;
+}
+input[name="radio-categories"]:checked ~ .categories {
+	box-shadow: none;
+	border-radius: 10px;
+	background: #000;
+}
+input[name="radio-categories"]:checked ~ .categories > .category-label{
+	color: #fff;
+	text-shadow: 3px 4px #444;
+}
+
+/* Menu */
+
+#menu-container img {
+	height: 200px;
+	width: auto;
+	object-fit: contain;
+	transition: 1s ease;
+}
+#menu-container p:nth-of-type(odd) {
+	font-family: Quicksand;
+	font-size: 1.2em;
+	line-height: 1em;
+	margin: 5px;
+	color: #000;
+}
+#menu-container p:nth-of-type(even) {
+	font-size: 1em;
+	margin: 5px;
+	color: #000;
+}
+.menu-category-title {
+	font-family: Quicksand;
+	font-size: 3em;
+	padding-bottom: 20px;
+}
+.menu-item{
+	width: 150px;
+	text-align: center;
+	cursor: pointer;
+	overflow: hidden;
+	transition: 0.35s ease;
+}
+.menu-item:hover {
+	background: #fff;
+	z-index: 10;
+	box-shadow: 0 4px 8px 5px rgba(0, 0, 0, 0.2), 0 6px 20px 5px rgba(0, 0, 0, 0.19);
+	transform: scale(1.1);
+}
+
+/* MODAL */
+
+.modal-body{
+	overflow: scroll;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+.modal-body::-webkit-scrollbar {
+	display: none;
+}
+.modal-wrapper{
+	padding: 0 0 10px;
+}
+.modal-image-container{
+	position: sticky;
+	top: 0;
+	padding: 20px 0;
+}
+.modal-image-container img{
+	height: 50vh;
+	width: auto;
+	object-fit: contain;
+}
+.modal-product-header{
+	position: sticky;
+	top: 0;
+	padding-top: 10px;
+	background: #fff;
+	z-index: 100;
+}
+#modal-product-name{
+	font-family: Quicksand;
+}
+.modal-options, 
+.modal-options > input, 
+.modal-options > label{
+	cursor: pointer;
+}
