@@ -1,5 +1,9 @@
 @font-face { font-family: MoonImpact; src: url('../assets/fonts/MoonImpact.ttf'); } 
-@font-face { font-family: Miriam; src: url('../assets/fonts/mriam.ttf'); } 
+@font-face { font-family: Charlotte; src: url('../assets/fonts/charlotte.otf'); }
+@font-face { font-family: Miriam; src: url('../assets/fonts/mriam.ttf'); }
+@font-face { font-family: Nevada; src: url('../assets/fonts/SANevada.otf'); } 
+@font-face { font-family: Quicksand; src: url('../assets/fonts/Quicksand-Bold.ttf'); } 
+
 
 body, html{
 	animation: bodyOnLoad 0.5s ease;

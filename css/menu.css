@@ -1,6 +1,3 @@
-@import url('http://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,700,700italic,900');
-@font-face { font-family: Nevada; src: url('../assets/fonts/SANevada.otf'); } 
-@font-face { font-family: Quicksand; src: url('../assets/fonts/Quicksand-Bold.ttf'); } 
 
 /* CATEGORIES */
 
@@ -112,7 +109,9 @@ input[name="radio-categories"]:checked ~ .categories > .category-label{
 #modal-product-name{
 	font-family: Quicksand;
 }
-.modal-options, 
+.modal-options {
+	cursor: default;
+}
 .modal-options > input, 
 .modal-options > label{
 	cursor: pointer;
