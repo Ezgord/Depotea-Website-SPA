@@ -66,6 +66,12 @@ input[name="radio-categories"]:checked ~ .category-label {
 	font-size: 3em;
 	padding-bottom: 20px;
 }
+.menu-category-title div {
+	border: 5px solid #000;
+	border-radius: 20px;
+	padding: 3px 10px;
+	text-shadow: 3px 4px #ccc;
+}
 .menu-item{
 	width: 150px;
 	text-align: center;
@@ -93,6 +99,9 @@ input[name="radio-categories"]:checked ~ .category-label {
 #modal-wrapper{
 	padding: 0 0 10px;
 }
+.modal-container{
+	margin: 0;
+}
 .modal-image-container{
 	position: sticky;
 	top: 0;
@@ -109,6 +118,9 @@ input[name="radio-categories"]:checked ~ .category-label {
 	padding-top: 10px;
 	background: #fff;
 	z-index: 100;
+}
+#modal-quantity-wrapper{
+	margin: 0;
 }
 #modal-product-name{
 	font-family: Quicksand;
@@ -129,6 +141,9 @@ input[name="radio-categories"]:checked ~ .category-label {
 }
 .quantity-btn:hover {
 	background: #eee;
+}
+#modal-product-totalprice {
+	margin-bottom: 20px;
 }
 .modal-options {
 	cursor: default;

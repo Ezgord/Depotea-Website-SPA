@@ -47,7 +47,7 @@
 							<div class="modal-product-header">
 								<h2 id="modal-product-name" style="margin: 0;">Product Name</h2>
 								<span id="modal-span">description</span>
-								<h5>Quantity:
+								<h5 id="modal-quantity-wrapper">Quantity:
 									<button class="quantity-btn down btn btn-link px-2" onclick="quantityChange('quantity-')">
 										<i class="fa-solid fa-circle-minus" style="color: #000;"></i>
 									</button>
@@ -79,6 +79,10 @@
 										<div class="product-sizes modal-options">
 											<input name="product-size" id="product-size2" type="radio" oninput="productTotalPrice()"></input>
 											<label class="product-size-label" for="product-size2"></label>
+										</div>
+										<div class="product-sizes modal-options">
+											<input name="product-size" id="product-size3" type="radio" oninput="productTotalPrice()"></input>
+											<label class="product-size-label" for="product-size3"></label>
 										</div>
 									</form>
 								</div>
@@ -128,7 +132,7 @@
 										</div>
 										<div class="beverage-addons modal-options">
 											<input name="beverage-addon" id="addon-natadecoco" type="checkbox" value="15" oninput="productTotalPrice()"></input>
-											<label class="beverage-addon-label" for="addon-natadecoco">₱15 - Nata de coco</label>
+											<label class="beverage-addon-label" for="addon-natadecoco">₱15 - Nata De Coco</label>
 										</div>
 										<div class="milktea-addons modal-options">
 											<input name="beverage-addon" id="addon-crushedoreo" type="checkbox" value="15" oninput="productTotalPrice()"></input>
