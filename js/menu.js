@@ -72,56 +72,145 @@ function addModalAttribute() {
 	for (var i=0; i < elements.length; i++) {
 		elements[i].setAttribute("data-bs-toggle", "modal");
 		elements[i].setAttribute("data-bs-target", "#menu-item-modal");
-		elements[i].setAttribute("onclick", "modalUpdate(this.querySelector('p').innerHTML, this.querySelector('p').nextElementSibling.innerHTML, this.querySelector('img').getAttribute('src'))");
+		elements[i].setAttribute("onclick", "modalUpdate($(this), $(this).closest('section'), this.querySelector('p').innerHTML, this.querySelector('p').nextElementSibling.innerHTML, this.querySelector('img').getAttribute('src'))");
 	}
 }
 
-function modalUpdate(productTitle, productPriceRaw, productImage) {
+function modalUpdate(menuItem, selectedItem, productTitle, productPriceRaw, productImage) {
+		// RESET ALL
 	$('#menu-item-modal').find('form').trigger('reset');
-	$("#modal-product-image").attr('src', productImage);
+	$('#modal-wrapper *').show();
+	$('#modal-wrapper input').prop('disabled', false);
+	$('#product-size-option input').prop('value', '0');
+		// SET PRODUCT INFO
+	$('#modal-product-image').prop('src', productImage);
+	$('#modal-product-name').text(productTitle);
 	$('#modal-product-totalprice').text('₱');
-	$('#modal-product-totalprice').text(productPriceRaw);
-	document.getElementById("modal-product-name").innerHTML = productTitle;
-	
+	$('#modal-product-totalprice').text(productPriceRaw)
+	$('#modal-product-quantity').val(1);
+		// GET PRICE FROM PRODUCT INFO
 	productPrice = parseInt(productPriceRaw.slice(1));
 	
-	if($('.menu-item').parents().hasClass('milktea-document')) {
-		document.getElementById('modal-span').innerHTML = '(Pearls Included)';
-		$('.general-options').show();
-		$('.beverage-options').show();
-		$('.snacks-options').hide();
-		$('.ricemeals-options').hide();
-		
-		$("#product-size1").attr('value', '0');
-		$("#product-size1 + label").text('₱70 - Medium');
-		$("#product-size2").attr('value', '10');
-		$("#product-size2 + label").text('₱80 - Large');
+	if($(menuItem).parents().hasClass('milktea-document')) {
+		console.log("milktea selected");
+		$("#modal-product-name").append(' Milk Tea');
+		modalProductMilkTea(selectedItem);
 	}
-	else if($('.menu-item').parents().hasClass('fruittea-document')) {
-		document.getElementById('modal-span').innerHTML = '(Pearls Included)';
-		$('.general-options').show();
-		$('.beverage-options').show();
-		$('.snacks-options').hide();
-		$('.ricemeals-options').hide();
+	else if($(menuItem).parents().hasClass('fruittea-document')) {
+		console.log("fruittea selected");
+		$("#modal-product-name").append(' Fruit Tea');
+		modalProductFruitTea(selectedItem);
 	}
-	else if($('.menu-item').parents().hasClass('snacks-document')) {
+	else if($(menuItem).parents().hasClass('snacks-document')) {
 		document.getElementById('modal-span').innerHTML = '';
 		$('.general-options').hide();
 		$('.beverage-options').hide();
-		$('.snacks-options').show();
 		$('.ricemeals-options').hide();
 	}
-	else if($('.menu-item').parents().hasClass('ricemeals-document')) {
+	else if($(menuItem).parents().hasClass('ricemeals-document')) {
 		document.getElementById('modal-span').innerHTML = '[description of meal]';
 		$('.general-options').hide();
 		$('.beverage-options').hide();
 		$('.snacks-options').hide();
-		$('.ricemeals-options').show();
 	}
 }
 
+function modalProductMilkTea(selectedItem) {
+	$('.snacks-options').hide();
+	$('.ricemeals-options').hide();
+	$('.fruittea-addons').hide();
+	
+	if ($(selectedItem).hasClass('classic-milktea')) {
+		console.log("classic milktea selected");
+		$('#modal-span').text('(Pearls Included)');
+		$("#product-size-option > h5").text('Size:');
+		
+		$("#product-size1 + label").text('₱70 - Medium');
+		$("#product-size1").prop('checked', true);
+		
+		$("#product-size2 + label").text('₱80 - Large');
+		$("#product-size2").prop('value', '10');
+	}
+	else if ($(selectedItem).hasClass('special-edition')) {
+		console.log("special edition selected");
+		$('#modal-span').text('(Pearls Included)');
+		$("#product-size-option > h5").text('Large Size Only');
+		
+		$("#product-size1 + label").text('Medium');
+		$("#product-size1").prop('disabled', true);
+		
+		$("#product-size2 + label").text('₱95 - Large');
+		$("#product-size2").prop('checked', true);
+	}
+	else if ($(selectedItem).hasClass('firstclass-milktea')) {
+		console.log("firstclass-milktea selected");
+		$('#modal-span').text('(Pearls Included)');
+		$("#product-size-option > h5").text('Large Size Only');
+		
+		$("#product-size1 + label").text('Medium');
+		$("#product-size1").prop('disabled', true);
+		
+		$("#product-size2 + label").text('₱115 - Large');
+		$("#product-size2").prop('checked', true);
+	}
+	else if ($(selectedItem).hasClass('creamcheese-series')) {
+		console.log("creamcheese-series selected");
+		$('#modal-span').text('(Pearls Included)');
+		$("#product-size-option > h5").text('Large Size Only');
+		
+		$("#product-size1 + label").text('Medium');
+		$("#product-size1").prop('disabled', true);
+		
+		$("#product-size2 + label").text('₱115 - Large');
+		$("#product-size2").prop('checked', true);
+	}
+}
+
+function modalProductFruitTea(selectedItem) {
+	$('.snacks-options').hide();
+	$('.ricemeals-options').hide();
+	$('.milktea-sugar-option').hide();
+	$('.milktea-addons').hide();
+	
+	if ($(selectedItem).hasClass('classic-fruittea')) {
+		$('#modal-span').text('(Nata de coco Included)');
+		$("#product-size-option > h5").text('Large Size Only');
+		
+		$("#product-size1 + label").text('Medium');
+		$("#product-size1").prop('disabled', true);
+		
+		$("#product-size2 + label").text('₱80 - Large');
+		$("#product-size2").prop('checked', true);
+	}
+}
+
+function quantityChange(quantityBtn) {
+	var oldVal = $('#modal-product-quantity').val();
+	var newVal;
+	
+	if (quantityBtn == 'quantity-') {
+		if (oldVal <= 1) {
+			newVal = 1;
+		}
+		else {
+			newVal = parseInt(oldVal) - 1;
+		}
+	}
+	else {
+		if (oldVal >= 9) {
+			newVal = 9;
+		}
+		else {
+			newVal = parseInt(oldVal) + 1;
+		}
+	}
+	
+	$('#modal-product-quantity').val(newVal);
+}
+	
 function productTotalPrice() {
 	var productTotalPrice = productPrice;
+	var productQuantity;
 	var sizePrice = 0;
 	var addonPrice = 0;
 	var ricemealsOptionPrice = 0;
@@ -135,8 +224,13 @@ function productTotalPrice() {
 	}
 	
 	if ($("[name='beverage-addon']").is(':checked')) {
+		$("[name='beverage-addon']").prop('disabled', true);
+		$("[name='beverage-addon']:checked").prop('disabled', false);
 		addonPrice += parseInt($("[name='beverage-addon']:checked").val());
 		productTotalPrice = parseInt(productTotalPrice + addonPrice);
+	}
+	else if ($("[name='beverage-addon']")) {
+		$("[name='beverage-addon']").prop('disabled', false);
 	}
 	else {
 		productTotalPrice = parseInt(productTotalPrice + addonPrice);
@@ -151,19 +245,4 @@ function productTotalPrice() {
 	}
 	
 	$('#modal-product-totalprice').text('₱' + productTotalPrice);
-}
-
-function ItemSizePriceUpdate(clicked_id){
-    var ItemsizeLarge = document.getElementById('flexRadioDefault8')
-    var modalParent = ItemsizeLarge.parentElement.parentElement.parentElement.parentElement
-    var ActiveID = clicked_id
-    console.log(ActiveID)
-    switch (ActiveID){
-        case "flexRadioDefault7":
-        modalParent.getElementsByClassName('shop-item-modal-price')[0].innerText = '₱' + '70'
-        break;
-        case "flexRadioDefault8":
-        modalParent.getElementsByClassName('shop-item-modal-price')[0].innerText = '₱' + '80'
-        break;
-    }
 }

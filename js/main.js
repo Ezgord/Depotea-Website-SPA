@@ -11,6 +11,17 @@ $(function () {
 		$(".fullnavBtn").removeClass("active");
 		$("#fullnav").removeClass("open");
 	});
+
+	jQuery.extend( jQuery.fn, {
+		// Name of our method & one argument (the parent selector)
+		within: function( pSelector ) {
+			// Returns a subset of items using jQuery.filter
+			return this.filter(function(){
+				// Return truthy/falsey based on presence in parent
+				return $(this).closest( pSelector ).length;
+			});
+		}
+	});
 });
 
 //VIDEO SLIDESHOW data-bs-toggle="modal" data-bs-target="#menu-item-modal"
@@ -23,6 +34,8 @@ var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
 	if (this.readyState == 4 && this.status == 200) {
 		document.getElementById("index-body-container").innerHTML = this.responseText;
+		
+		linktoMilkTea();
 	}
 };
 
