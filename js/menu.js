@@ -473,8 +473,8 @@ function addToCart() {
 	var selectedFlavor = $("[name='fries-flavor']:checked + label").text();
 	var selectedRiceMealsOption = $("[name='ricemeals-option']:checked + label").text();
 	var productQuantity = $('#modal-product-quantity').val();
-	var modalTotalPrice = $('#modal-product-price').text().slice(1);
-	var finalModalTotalPrice = parseInt(productQuantity * modalTotalPrice);
+	var modalTotalPrice = $('#modal-product-price').text();
+	var modalFinalPrice = parseInt(productQuantity * modalTotalPrice.slice(1));
 	
 	if ($(selectedItemCateg).parents().hasClass('milktea-document')) {
 		console.log('Category	: Milk Tea');
@@ -551,6 +551,7 @@ function addToCart() {
 	console.log('Addon		: ' + selectedAddon);
 	console.log('Flavor		: ' + selectedFlavor);
 	console.log('RMOption	: ' + selectedRiceMealsOption);
+	console.log('Total Price	: ' + modalTotalPrice);
 	console.log('Quantity	: ' + productQuantity);
-	console.log('Total Price	: ' + finalModalTotalPrice);
+	console.log('Final Price	: ₱' + modalFinalPrice);
 }
