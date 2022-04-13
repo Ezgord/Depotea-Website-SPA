@@ -82,6 +82,7 @@ function modalUpdate(menuItem, selectedItem, productTitle, productPriceRaw, prod
 	$('#modal-wrapper *').show();
 	$('#modal-wrapper input').prop('disabled', false);
 	$('#appended-title').remove();
+	$('#modal-span').text('');
 	$('#product-size-option input').prop('value', '0');
 	$('.product-sizes:eq(2)').hide();
 	$('#addon-natadecoco ~ label').text('₱15 - Nata De Coco');
@@ -92,7 +93,7 @@ function modalUpdate(menuItem, selectedItem, productTitle, productPriceRaw, prod
 	$('#modal-product-quantity').val(1);
 		// GET PRICE FROM PRODUCT INFO
 	productPrice = parseInt(productPriceRaw.slice(1));
-			console.log(productPrice);
+	productTitleForTotalPrice = productTitle;
 	
 	if($(menuItem).parents().hasClass('milktea-document')) {
 		$("#modal-product-name").append('<span id="appended-title"> Milk Tea</span>');
@@ -156,10 +157,10 @@ function modalProductFruitTea(selectedItem, productPrice) {
 	$('.milktea-sugar-option').hide();
 	$('.milktea-addons').hide();
 	
-	$('#modal-span').text('(Nata De Coco Included)');
 	$("#product-size-option > h5").text('Large Size Only');
 	
 	if ($(selectedItem).hasClass('classic-fruittea')) {
+		$('#modal-span').text('(Nata De Coco Included)');
 		$('#addon-natadecoco ~ label').text('₱15 - Extra Nata De Coco');
 		
 		$("#product-size1 + label").text('Medium');
@@ -187,7 +188,6 @@ function modalProductFruitTea(selectedItem, productPrice) {
 	
 	else if ($(selectedItem).hasClass('lemon-juice')) {
 		$("#modal-product-name").append('<span id="appended-title"> Juice</span>');
-		$('#modal-span').text('');
 		
 		if (productPrice == 70) {
 			$("#product-size-option > h5").text('Size:');
@@ -216,6 +216,7 @@ function modalProductFruitTea(selectedItem, productPrice) {
 	
 	else if ($(selectedItem).hasClass('yakult-series')) {
 		$("#modal-product-name").append('<span id="appended-title"> Yakult</span>');
+		$('#modal-span').text('(Nata De Coco Included)');
 		$('#addon-natadecoco ~ label').text('₱15 - Extra Nata De Coco');
 		
 		$("#product-size1 + label").text('Medium');
@@ -227,7 +228,6 @@ function modalProductFruitTea(selectedItem, productPrice) {
 }
 
 function modalProductSnacks(selectedItem, productTitle, productPrice) {
-	$('#modal-span').text('');
 	$('.general-options').hide();
 	$('.beverage-options').hide();
 	$('.snacks-options').hide();
@@ -291,6 +291,16 @@ function modalProductSnacks(selectedItem, productTitle, productPrice) {
 				
 				$("#product-size3").prop('value', '750');	
 			}
+			
+			if (productTitle === "Pancit Guisado") {
+				$('#modal-span').text('Good for 2-3 Persons');
+			}
+			else if (productTitle === "Bihon") {
+				$('#modal-span').text('Good for 2-3 Persons');
+			}
+			else if (productTitle === "Pancit Bihon") {
+				$('#modal-span').text('Good for 2-3 Persons');
+			}
 		}
 	}
 }
@@ -337,7 +347,16 @@ function modalProductRiceMeals(selectedItem, productTitle) {
 	else if ($(selectedItem).hasClass('chickens')) {
 		$('.ricemeals-options').hide();
 		
-		if (productTitle === "Buttered Fried Chicken") {
+		if(productTitle === "Classic Chicken Lollipop") {
+			$('#modal-span').text('7 pcs. Classic Fried Chicken Lollipop');
+		}
+		else if(productTitle === "Buttered Chicken Lollipop") {
+			$('#modal-span').text('7 pcs. Buttered Fried Chicken Lollipop');
+		}
+		else if(productTitle === "Classic Fried Chicken") {
+			$('#modal-span').text('Half Cut Classic Fried Chicken');
+		}
+		else if (productTitle === "Buttered Fried Chicken") {
 			$('.general-options').show();
 			
 			$("#product-size1 + label").text('₱259 - Half');
@@ -383,6 +402,40 @@ function productTotalPrice() {
 	if ($("[name='product-size']").is(':checked')) {
 		sizePrice += parseInt($("[name='product-size']:checked").val());
 		productTotalPrice = parseInt(productTotalPrice + sizePrice);
+		
+		if (productTitleForTotalPrice === "Pancit Guisado") {
+			if ($("#product-size1").is(':checked')) {
+				$('#modal-span').text('Good for 2-3 Persons');
+			}
+			else if ($("#product-size2").is(':checked')) {
+				$('#modal-span').text('Good for 5-8 Persons');
+			}
+			else if ($("#product-size3").is(':checked')) {
+				$('#modal-span').text('Good for 8-12 Persons');
+			}
+		}
+		else if (productTitleForTotalPrice === "Bihon") {
+			if ($("#product-size1").is(':checked')) {
+				$('#modal-span').text('Good for 2-3 Persons');
+			}
+			else if ($("#product-size2").is(':checked')) {
+				$('#modal-span').text('Good for 5-8 Persons');
+			}
+			else if ($("#product-size3").is(':checked')) {
+				$('#modal-span').text('Good for 8-12 Persons');
+			}
+		}
+		else if (productTitleForTotalPrice === "Pancit Bihon") {
+			if ($("#product-size1").is(':checked')) {
+				$('#modal-span').text('Good for 2-3 Persons');
+			}
+			else if ($("#product-size2").is(':checked')) {
+				$('#modal-span').text('Good for 5-8 Persons');
+			}
+			else if ($("#product-size3").is(':checked')) {
+				$('#modal-span').text('Good for 8-12 Persons');
+			}
+		}
 	}
 	else {
 		productTotalPrice = parseInt(productTotalPrice + sizePrice);
