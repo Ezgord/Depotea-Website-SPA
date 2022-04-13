@@ -92,6 +92,7 @@ function modalUpdate(menuItem, selectedItem, productTitle, productPriceRaw, prod
 	$('#modal-product-quantity').val(1);
 		// GET PRICE FROM PRODUCT INFO
 	productPrice = parseInt(productPriceRaw.slice(1));
+			console.log(productPrice);
 	
 	if($(menuItem).parents().hasClass('milktea-document')) {
 		$("#modal-product-name").append('<span id="appended-title"> Milk Tea</span>');
@@ -99,10 +100,10 @@ function modalUpdate(menuItem, selectedItem, productTitle, productPriceRaw, prod
 	}
 	else if($(menuItem).parents().hasClass('fruittea-document')) {
 		$("#modal-product-name").append('<span id="appended-title"> Fruit Tea</span>');
-		modalProductFruitTea(selectedItem);
+		modalProductFruitTea(selectedItem, productPrice);
 	}
 	else if($(menuItem).parents().hasClass('snacks-document')) {
-		modalProductSnacks(selectedItem);
+		modalProductSnacks(selectedItem, productTitle, productPrice);
 	}
 	else if($(menuItem).parents().hasClass('ricemeals-document')) {
 		modalProductRiceMeals(selectedItem, productTitle);
@@ -149,7 +150,7 @@ function modalProductMilkTea(selectedItem) {
 	}
 }
 
-function modalProductFruitTea(selectedItem) {
+function modalProductFruitTea(selectedItem, productPrice) {
 	$('.snacks-options').hide();
 	$('.ricemeals-options').hide();
 	$('.milktea-sugar-option').hide();
@@ -158,23 +159,20 @@ function modalProductFruitTea(selectedItem) {
 	$('#modal-span').text('(Nata De Coco Included)');
 	$("#product-size-option > h5").text('Large Size Only');
 	
-	if ($(selectedItem).hasClass('classic-fruittea-80')) {
+	if ($(selectedItem).hasClass('classic-fruittea')) {
 		$('#addon-natadecoco ~ label').text('₱15 - Extra Nata De Coco');
 		
 		$("#product-size1 + label").text('Medium');
 		$("#product-size1").prop('disabled', true);
 		
-		$("#product-size2 + label").text('₱80 - Large');
-		$("#product-size2").prop('checked', true);
-	}
-	else if ($(selectedItem).hasClass('classic-fruittea-90')) {
-		$('#addon-natadecoco ~ label').text('₱15 - Extra Nata De Coco');
-		
-		$("#product-size1 + label").text('Medium');
-		$("#product-size1").prop('disabled', true);
-		
-		$("#product-size2 + label").text('₱90 - Large');
-		$("#product-size2").prop('checked', true);
+		if (productPrice == 80) {
+			$("#product-size2 + label").text('₱80 - Large');
+			$("#product-size2").prop('checked', true);
+		}
+		else if (productPrice == 90) {
+			$("#product-size2 + label").text('₱90 - Large');
+			$("#product-size2").prop('checked', true);
+		}
 	}
 	
 	else if ($(selectedItem).hasClass('creambased-fruittea')) {
@@ -187,43 +185,36 @@ function modalProductFruitTea(selectedItem) {
 		$("#product-size2").prop('checked', true);
 	}
 	
-	else if ($(selectedItem).hasClass('classic-lemonjuice')) {
-		$('#appended-title').remove();
-		$("#modal-product-name").append('<span id="appended-title"> Juice</span>');
-		$('#modal-span').text('');
-		$("#product-size-option > h5").text('Size:');
-		
-		$("#product-size1 + label").text('₱70 Medium');
-		$("#product-size1").prop('checked', true);
-		
-		$("#product-size2 + label").text('₱80 Large');
-		$("#product-size2").prop('value', '10');
-	}
-	else if ($(selectedItem).hasClass('lemon-juice-80')) {
-		$('#appended-title').remove();
+	else if ($(selectedItem).hasClass('lemon-juice')) {
 		$("#modal-product-name").append('<span id="appended-title"> Juice</span>');
 		$('#modal-span').text('');
 		
-		$("#product-size1 + label").text('Medium');
-		$("#product-size1").prop('disabled', true);
-		
-		$("#product-size2 + label").text('₱80 - Large');
-		$("#product-size2").prop('checked', true);
-	}
-	else if ($(selectedItem).hasClass('lemon-juice-85')) {
-		$('#appended-title').remove();
-		$("#modal-product-name").append('<span id="appended-title"> Juice</span>');
-		$('#modal-span').text('');
-		
-		$("#product-size1 + label").text('Medium');
-		$("#product-size1").prop('disabled', true);
-		
-		$("#product-size2 + label").text('₱85 - Large');
-		$("#product-size2").prop('checked', true);
+		if (productPrice == 70) {
+			$("#product-size-option > h5").text('Size:');
+			
+			$("#product-size1 + label").text('₱70 Medium');
+			$("#product-size1").prop('checked', true);
+			
+			$("#product-size2 + label").text('₱80 Large');
+			$("#product-size2").prop('value', '10');
+		}
+		else if (productPrice == 80) {
+			$("#product-size1 + label").text('Medium');
+			$("#product-size1").prop('disabled', true);
+			
+			$("#product-size2 + label").text('₱80 - Large');
+			$("#product-size2").prop('checked', true);
+		}
+		else if (productPrice == 85) {
+			$("#product-size1 + label").text('Medium');
+			$("#product-size1").prop('disabled', true);
+			
+			$("#product-size2 + label").text('₱85 - Large');
+			$("#product-size2").prop('checked', true);
+		}
 	}
 	
 	else if ($(selectedItem).hasClass('yakult-series')) {
-		$('#appended-title').remove();
 		$("#modal-product-name").append('<span id="appended-title"> Yakult</span>');
 		$('#addon-natadecoco ~ label').text('₱15 - Extra Nata De Coco');
 		
@@ -235,7 +226,7 @@ function modalProductFruitTea(selectedItem) {
 	}
 }
 
-function modalProductSnacks(selectedItem) {
+function modalProductSnacks(selectedItem, productTitle, productPrice) {
 	$('#modal-span').text('');
 	$('.general-options').hide();
 	$('.beverage-options').hide();
@@ -244,24 +235,25 @@ function modalProductSnacks(selectedItem) {
 	
 	$("#product-size-option > h5").text('Size:');
 	
-	if ($(selectedItem).hasClass('toasted-bread-classicbutter')) {
+	if ($(selectedItem).hasClass('toasted-bread')) {
 		$('.general-options').show();
 		
-		$("#product-size1 + label").text('₱70 - Solo');
-		$("#product-size1").prop('checked', true);
-		
-		$("#product-size2 + label").text('₱130 - Family');
-		$("#product-size2").prop('value', '60');
+		if(productTitle === "Classic Butter") {
+			$("#product-size1 + label").text('₱70 - Solo');
+			$("#product-size1").prop('checked', true);
+			
+			$("#product-size2 + label").text('₱130 - Family');
+			$("#product-size2").prop('value', '60');
+		}
+		else if (productTitle === "Garlic Bread") {
+			$("#product-size1 + label").text('₱80 - Solo');
+			$("#product-size1").prop('checked', true);
+			
+			$("#product-size2 + label").text('₱140 - Family');
+			$("#product-size2").prop('value', '60');
+		}
 	}
-	else if ($(selectedItem).hasClass('toasted-bread-garlicbread')) {
-		$('.general-options').show();
-		
-		$("#product-size1 + label").text('₱80 - Solo');
-		$("#product-size1").prop('checked', true);
-		
-		$("#product-size2 + label").text('₱140 - Family');
-		$("#product-size2").prop('value', '60');
-	}
+	
 	else if ($(selectedItem).hasClass('potato-fries')) {
 		$('.general-options').show();
 		$('.snacks-options').show();
@@ -272,49 +264,88 @@ function modalProductSnacks(selectedItem) {
 		$("#product-size2 + label").text('₱110 - Large');
 		$("#product-size2").prop('value', '50');
 	}
-	else if ($(selectedItem).hasClass('pancit-bihon')) {
+	
+	else if ($(selectedItem).hasClass('pancit')) {
 		$('.general-options').show();
 		$('.product-sizes:eq(2)').show();
 		
-		$("#product-size1 + label").text('₱200 - Regular');
-		$("#product-size1").prop('checked', true);
-		
-		$("#product-size2 + label").text('₱650 - Medium');
-		$("#product-size2").prop('value', '450');
-		
-		$("#product-size3 + label").text('₱950 - Large');
-		$("#product-size3").prop('value', '750');
+		if (productTitle === "Special Lomi") {
+			$('.general-options').hide();
+			$('.product-sizes:eq(2)').hide();
+		}
+		else if (productPrice >= 190 && productPrice <= 200) {
+			$("#product-size1 + label").text('₱' + productPrice + ' - Regular');
+			$("#product-size1").prop('checked', true);
+			
+			$("#product-size2 + label").text('₱650 - Medium');
+			
+			$("#product-size3 + label").text('₱950 - Large');
+			
+			if (productPrice == 190) {
+				$("#product-size2").prop('value', '460');
+				
+				$("#product-size3").prop('value', '760');	
+			}
+			else if (productPrice == 200) {
+				$("#product-size2").prop('value', '450');
+				
+				$("#product-size3").prop('value', '750');	
+			}
+		}
 	}
 }
 
 function modalProductRiceMeals(selectedItem, productTitle) {
-	$('#modal-span').text('[description of meal]');
 	$('.general-options').hide();
 	$('.beverage-options').hide();
 	$('.snacks-options').hide();
 	
 	if ($(selectedItem).hasClass('ricemeals')) {
 		if(productTitle === "Grilled Liempo") {
-			console.log('test');
+			$('#modal-span').text('Grilled Pork with Rice');
+		}
+		else if(productTitle === "Lechon Kawali") {
+			$('#modal-span').text('Fried Pork Belly with Rice');
+		}
+		else if(productTitle === "Honey Butter Glazed Fried Chicken") {
+			$('#modal-span').text('2 pc. Fried Chicken with Honey Butter Sauce, Veggies and Rice');
+		}
+		else if(productTitle === "2 pc. Fried Chicken") {
+			$('#modal-span').text('2 pc. Fried Chicken with Rice');
+		}
+		else if(productTitle === "Chicken Lollipop") {
+			$('#modal-span').text('3 pc. Classic Chicken Lollipop with Rice');
 		}
 	}
 	if ($(selectedItem).hasClass('breakfastmeals')) {
 		if(productTitle === "Spam and Egg") {
-			console.log('test2');
+			$('#modal-span').text('2 pc. Spam, Egg and Rice');
+		}
+		else if(productTitle === "Longganisa and Egg") {
+			$('#modal-span').text('2 pc. Longganisa, Egg and Rice');
+		}
+		else if(productTitle === "Hotdog and Egg") {
+			$('#modal-span').text('2 pc. Tender Juicy Hotdog, Egg and Rice');
+		}
+		else if(productTitle === "Tocino and Egg") {
+			$('#modal-span').text('Tocino, Egg and Rice');
+		}
+		else if(productTitle === "Corned Beef and Egg") {
+			$('#modal-span').text('Corned Beef, Egg and Rice');
 		}
 	}
 	else if ($(selectedItem).hasClass('chickens')) {
 		$('.ricemeals-options').hide();
-	}
-	else if ($(selectedItem).hasClass('chickens-buttered')) {
-		$('.general-options').show();
-		$('.ricemeals-options').hide();
 		
-		$("#product-size1 + label").text('₱259 - Half');
-		$("#product-size1").prop('checked', true);
-		
-		$("#product-size2 + label").text('₱489 - Whole');
-		$("#product-size2").prop('value', '230');
+		if (productTitle === "Buttered Fried Chicken") {
+			$('.general-options').show();
+			
+			$("#product-size1 + label").text('₱259 - Half');
+			$("#product-size1").prop('checked', true);
+			
+			$("#product-size2 + label").text('₱489 - Whole');
+			$("#product-size2").prop('value', '230');
+		}
 	}
 }
 

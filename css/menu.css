@@ -61,12 +61,12 @@ input[name="radio-categories"]:checked ~ .category-label {
 	margin: 5px;
 	color: #000;
 }
-.menu-category-title {
+.menu-subcategory-title {
 	font-family: Quicksand;
 	font-size: 3em;
 	padding-bottom: 20px;
 }
-.menu-category-title div {
+.menu-subcategory-title div {
 	border: 5px solid #000;
 	border-radius: 20px;
 	padding: 3px 10px;
