@@ -76,7 +76,7 @@ function addModalAttribute() {
 	}
 }
 
-function modalUpdate(menuItem, selectedItem, productTitle, productPriceRaw, productImage) {
+function modalUpdate(selectedItem, selectedItemModal, productTitleRaw, productPriceRaw, productImage) {
 		// RESET ALL
 	$('#menu-item-modal').find('form').trigger('reset');
 	$('#modal-wrapper *').show();
@@ -88,30 +88,32 @@ function modalUpdate(menuItem, selectedItem, productTitle, productPriceRaw, prod
 	$('#addon-natadecoco ~ label').text('₱15 - Nata De Coco');
 		// SET PRODUCT INFO
 	$('#modal-product-image').prop('src', productImage);
-	$('#modal-product-name').text(productTitle);
-	$('#modal-product-totalprice').text(productPriceRaw)
+	$('#modal-product-name').text(productTitleRaw);
+	$('#modal-product-price').text(productPriceRaw)
 	$('#modal-product-quantity').val(1);
-		// GET PRICE FROM PRODUCT INFO
+		// GET INFO FROM PRODUCT INFO
 	productPrice = parseInt(productPriceRaw.slice(1));
-	productTitleForTotalPrice = productTitle;
+	productTitle = productTitleRaw;
+	selectedItemCateg = selectedItem;
+	selectedItemSubCateg = selectedItemModal;
 	
-	if($(menuItem).parents().hasClass('milktea-document')) {
+	if($(selectedItem).parents().hasClass('milktea-document')) {
 		$("#modal-product-name").append('<span id="appended-title"> Milk Tea</span>');
-		modalProductMilkTea(selectedItem);
+		modalProductMilkTea(selectedItemModal);
 	}
-	else if($(menuItem).parents().hasClass('fruittea-document')) {
+	else if($(selectedItem).parents().hasClass('fruittea-document')) {
 		$("#modal-product-name").append('<span id="appended-title"> Fruit Tea</span>');
-		modalProductFruitTea(selectedItem, productPrice);
+		modalProductFruitTea(selectedItemModal, productPrice);
 	}
-	else if($(menuItem).parents().hasClass('snacks-document')) {
-		modalProductSnacks(selectedItem, productTitle, productPrice);
+	else if($(selectedItem).parents().hasClass('snacks-document')) {
+		modalProductSnacks(selectedItemModal, productTitle, productPrice);
 	}
-	else if($(menuItem).parents().hasClass('ricemeals-document')) {
-		modalProductRiceMeals(selectedItem, productTitle);
+	else if($(selectedItem).parents().hasClass('ricemeals-document')) {
+		modalProductRiceMeals(selectedItemModal, productTitle);
 	}
 }
 
-function modalProductMilkTea(selectedItem) {
+function modalProductMilkTea(selectedItemModal) {
 	$('.snacks-options').hide();
 	$('.ricemeals-options').hide();
 	$('.fruittea-addons').hide();
@@ -119,7 +121,7 @@ function modalProductMilkTea(selectedItem) {
 	$('#modal-span').text('(Pearls Included)');
 	$("#product-size-option > h5").text('Large Size Only');
 	
-	if ($(selectedItem).hasClass('classic-milktea')) {
+	if ($(selectedItemModal).hasClass('classic-milktea')) {
 		$("#product-size-option > h5").text('Size:');
 		
 		$("#product-size1 + label").text('₱70 - Medium');
@@ -128,21 +130,21 @@ function modalProductMilkTea(selectedItem) {
 		$("#product-size2 + label").text('₱80 - Large');
 		$("#product-size2").prop('value', '10');
 	}
-	else if ($(selectedItem).hasClass('special-edition')) {
+	else if ($(selectedItemModal).hasClass('special-edition')) {
 		$("#product-size1 + label").text('Medium');
 		$("#product-size1").prop('disabled', true);
 		
 		$("#product-size2 + label").text('₱95 - Large');
 		$("#product-size2").prop('checked', true);
 	}
-	else if ($(selectedItem).hasClass('firstclass-milktea')) {
+	else if ($(selectedItemModal).hasClass('firstclass-milktea')) {
 		$("#product-size1 + label").text('Medium');
 		$("#product-size1").prop('disabled', true);
 		
 		$("#product-size2 + label").text('₱115 - Large');
 		$("#product-size2").prop('checked', true);
 	}
-	else if ($(selectedItem).hasClass('creamcheese-series')) {
+	else if ($(selectedItemModal).hasClass('creamcheese-series')) {
 		$("#product-size1 + label").text('Medium');
 		$("#product-size1").prop('disabled', true);
 		
@@ -151,7 +153,7 @@ function modalProductMilkTea(selectedItem) {
 	}
 }
 
-function modalProductFruitTea(selectedItem, productPrice) {
+function modalProductFruitTea(selectedItemModal, productPrice) {
 	$('.snacks-options').hide();
 	$('.ricemeals-options').hide();
 	$('.milktea-sugar-option').hide();
@@ -159,7 +161,7 @@ function modalProductFruitTea(selectedItem, productPrice) {
 	
 	$("#product-size-option > h5").text('Large Size Only');
 	
-	if ($(selectedItem).hasClass('classic-fruittea')) {
+	if ($(selectedItemModal).hasClass('classic-fruittea')) {
 		$('#modal-span').text('(Nata De Coco Included)');
 		$('#addon-natadecoco ~ label').text('₱15 - Extra Nata De Coco');
 		
@@ -176,7 +178,7 @@ function modalProductFruitTea(selectedItem, productPrice) {
 		}
 	}
 	
-	else if ($(selectedItem).hasClass('creambased-fruittea')) {
+	else if ($(selectedItemModal).hasClass('creambased-fruittea')) {
 		$('#modal-span').text('(Pearls Included)');
 	
 		$("#product-size1 + label").text('Medium');
@@ -186,7 +188,7 @@ function modalProductFruitTea(selectedItem, productPrice) {
 		$("#product-size2").prop('checked', true);
 	}
 	
-	else if ($(selectedItem).hasClass('lemon-juice')) {
+	else if ($(selectedItemModal).hasClass('lemon-juice')) {
 		$("#modal-product-name").append('<span id="appended-title"> Juice</span>');
 		
 		if (productPrice == 70) {
@@ -214,7 +216,7 @@ function modalProductFruitTea(selectedItem, productPrice) {
 		}
 	}
 	
-	else if ($(selectedItem).hasClass('yakult-series')) {
+	else if ($(selectedItemModal).hasClass('yakult-series')) {
 		$("#modal-product-name").append('<span id="appended-title"> Yakult</span>');
 		$('#modal-span').text('(Nata De Coco Included)');
 		$('#addon-natadecoco ~ label').text('₱15 - Extra Nata De Coco');
@@ -227,7 +229,7 @@ function modalProductFruitTea(selectedItem, productPrice) {
 	}
 }
 
-function modalProductSnacks(selectedItem, productTitle, productPrice) {
+function modalProductSnacks(selectedItemModal, productTitle, productPrice) {
 	$('.general-options').hide();
 	$('.beverage-options').hide();
 	$('.snacks-options').hide();
@@ -235,7 +237,7 @@ function modalProductSnacks(selectedItem, productTitle, productPrice) {
 	
 	$("#product-size-option > h5").text('Size:');
 	
-	if ($(selectedItem).hasClass('toasted-bread')) {
+	if ($(selectedItemModal).hasClass('toasted-bread')) {
 		$('.general-options').show();
 		
 		if(productTitle === "Classic Butter") {
@@ -254,7 +256,7 @@ function modalProductSnacks(selectedItem, productTitle, productPrice) {
 		}
 	}
 	
-	else if ($(selectedItem).hasClass('potato-fries')) {
+	else if ($(selectedItemModal).hasClass('potato-fries')) {
 		$('.general-options').show();
 		$('.snacks-options').show();
 		
@@ -265,7 +267,7 @@ function modalProductSnacks(selectedItem, productTitle, productPrice) {
 		$("#product-size2").prop('value', '50');
 	}
 	
-	else if ($(selectedItem).hasClass('pancit')) {
+	else if ($(selectedItemModal).hasClass('pancit')) {
 		$('.general-options').show();
 		$('.product-sizes:eq(2)').show();
 		
@@ -305,12 +307,12 @@ function modalProductSnacks(selectedItem, productTitle, productPrice) {
 	}
 }
 
-function modalProductRiceMeals(selectedItem, productTitle) {
+function modalProductRiceMeals(selectedItemModal, productTitle) {
 	$('.general-options').hide();
 	$('.beverage-options').hide();
 	$('.snacks-options').hide();
 	
-	if ($(selectedItem).hasClass('ricemeals')) {
+	if ($(selectedItemModal).hasClass('ricemeals')) {
 		if(productTitle === "Grilled Liempo") {
 			$('#modal-span').text('Grilled Pork with Rice');
 		}
@@ -327,7 +329,7 @@ function modalProductRiceMeals(selectedItem, productTitle) {
 			$('#modal-span').text('3 pc. Classic Chicken Lollipop with Rice');
 		}
 	}
-	if ($(selectedItem).hasClass('breakfastmeals')) {
+	if ($(selectedItemModal).hasClass('breakfastmeals')) {
 		if(productTitle === "Spam and Egg") {
 			$('#modal-span').text('2 pc. Spam, Egg and Rice');
 		}
@@ -344,7 +346,7 @@ function modalProductRiceMeals(selectedItem, productTitle) {
 			$('#modal-span').text('Corned Beef, Egg and Rice');
 		}
 	}
-	else if ($(selectedItem).hasClass('chickens')) {
+	else if ($(selectedItemModal).hasClass('chickens')) {
 		$('.ricemeals-options').hide();
 		
 		if(productTitle === "Classic Chicken Lollipop") {
@@ -392,9 +394,8 @@ function quantityChange(quantityBtn) {
 	$('#modal-product-quantity').val(newVal);
 }
 	
-function productTotalPrice() {
+function productCalcTotalPrice() {
 	var productTotalPrice = productPrice;
-	var productQuantity;
 	var sizePrice = 0;
 	var addonPrice = 0;
 	var ricemealsOptionPrice = 0;
@@ -403,7 +404,7 @@ function productTotalPrice() {
 		sizePrice += parseInt($("[name='product-size']:checked").val());
 		productTotalPrice = parseInt(productTotalPrice + sizePrice);
 		
-		if (productTitleForTotalPrice === "Pancit Guisado") {
+		if (productTitle === "Pancit Guisado") {
 			if ($("#product-size1").is(':checked')) {
 				$('#modal-span').text('Good for 2-3 Persons');
 			}
@@ -414,7 +415,7 @@ function productTotalPrice() {
 				$('#modal-span').text('Good for 8-12 Persons');
 			}
 		}
-		else if (productTitleForTotalPrice === "Bihon") {
+		else if (productTitle === "Bihon") {
 			if ($("#product-size1").is(':checked')) {
 				$('#modal-span').text('Good for 2-3 Persons');
 			}
@@ -425,7 +426,7 @@ function productTotalPrice() {
 				$('#modal-span').text('Good for 8-12 Persons');
 			}
 		}
-		else if (productTitleForTotalPrice === "Pancit Bihon") {
+		else if (productTitle === "Pancit Bihon") {
 			if ($("#product-size1").is(':checked')) {
 				$('#modal-span').text('Good for 2-3 Persons');
 			}
@@ -462,5 +463,93 @@ function productTotalPrice() {
 		productTotalPrice = parseInt(productTotalPrice + ricemealsOptionPrice);
 	}
 	
-	$('#modal-product-totalprice').text('₱' + productTotalPrice);
+	$('#modal-product-price').text('₱' + productTotalPrice);
+}
+
+function addToCart() {
+	var selectedSize = $("[name='product-size']:checked + label").text();
+	var selectedSugar = $("[name='milktea-sugar-button']:checked + label").text();
+	var selectedAddon = $("[name='beverage-addon']:checked + label").text();
+	var selectedFlavor = $("[name='fries-flavor']:checked + label").text();
+	var selectedRiceMealsOption = $("[name='ricemeals-option']:checked + label").text();
+	var productQuantity = $('#modal-product-quantity').val();
+	var modalTotalPrice = $('#modal-product-price').text();
+	
+	if ($(selectedItemCateg).parents().hasClass('milktea-document')) {
+		console.log('Category	: Milk Tea');
+		
+		if ($(selectedItemSubCateg).hasClass('classic-milktea')) {
+			console.log('Sub-Category: Classic Milk Tea');
+		}
+		else if ($(selectedItemSubCateg).hasClass('special-edition')) {
+			console.log('Sub-Category: Special Edition');
+		}
+		else if ($(selectedItemSubCateg).hasClass('firstclass-milktea')) {
+			console.log('Sub-Category: First Class Milk Tea');
+		}
+		else if ($(selectedItemSubCateg).hasClass('creamcheese-series')) {
+			console.log('Sub-Category: Cream Cheese Series');
+		}
+	}
+	else if ($(selectedItemCateg).parents().hasClass('fruittea-document')) {
+		console.log('Category	: Fruit Tea');
+		
+		if ($(selectedItemSubCateg).hasClass('classic-fruittea')) {
+			console.log('Sub-Category: Fruit Tea');
+		}
+		else if ($(selectedItemSubCateg).hasClass('creambased-fruittea')) {
+			console.log('Sub-Category: Cream Based Fruit Tea');
+		}
+		else if ($(selectedItemSubCateg).hasClass('lemon-juice')) {
+			console.log('Sub-Category: Lemon Juice');
+		}
+		else if ($(selectedItemSubCateg).hasClass('yakult-series')) {
+			console.log('Sub-Category: Yakult Series');
+		}
+	}
+	else if ($(selectedItemCateg).parents().hasClass('snacks-document')) {
+		console.log('Category	: Snacks');
+		
+		if ($(selectedItemSubCateg).hasClass('pic-a-snacks')) {
+			console.log('Sub-Category: Pic-A Snacks');
+		}
+		else if ($(selectedItemSubCateg).hasClass('sandwich-hamburger')) {
+			console.log('Sub-Category: Sandwich / Hamburger');
+		}
+		else if ($(selectedItemSubCateg).hasClass('toasted-bread')) {
+			console.log('Sub-Category: Toasted Bread');
+		}
+		else if ($(selectedItemSubCateg).hasClass('potato-fries')) {
+			console.log('Sub-Category: Potato Fries');
+		}
+		else if ($(selectedItemSubCateg).hasClass('pancit')) {
+			console.log('Sub-Category: Pancit');
+		}
+		else if ($(selectedItemSubCateg).hasClass('pasta')) {
+			console.log('Sub-Category: Pasta');
+		}
+	}
+	else if ($(selectedItemCateg).parents().hasClass('ricemeals-document')) {
+		console.log('Category	: Rice Meals');
+		
+		if ($(selectedItemSubCateg).hasClass('ricemeals')) {
+			console.log('Sub-Category: Rice Meals');
+		}
+		else if ($(selectedItemSubCateg).hasClass('breakfastmeals')) {
+			console.log('Sub-Category: All Day Breakfast Meals');
+		}
+		else if ($(selectedItemSubCateg).hasClass('chickens')) {
+			console.log('Sub-Category: Chicken');
+		}
+	}
+	
+	console.log('Product		: ' + productTitle);
+	console.log('Base Price	: ' + productPrice);
+	console.log('Size		: ' + selectedSize);
+	console.log('Sugar		: ' + selectedSugar);
+	console.log('Addon		: ' + selectedAddon);
+	console.log('Flavor		: ' + selectedFlavor);
+	console.log('RMOption	: ' + selectedRiceMealsOption);
+	console.log('Quantity	: ' + productQuantity);
+	console.log('Total Price	: ' + modalTotalPrice);
 }
