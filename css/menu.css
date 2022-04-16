@@ -1,10 +1,4 @@
 
-label {
-	user-select: none;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-}
-
 /* CATEGORIES */
 
 .category-label{
@@ -70,7 +64,6 @@ input[name="radio-categories"]:checked ~ .category-label {
 	border: 5px solid #000;
 	border-radius: 20px;
 	padding: 3px 10px;
-	text-shadow: 3px 4px #ccc;
 }
 .menu-item{
 	width: 150px;
@@ -148,7 +141,16 @@ input[name="radio-categories"]:checked ~ .category-label {
 .modal-options {
 	cursor: default;
 }
-.modal-options > input, 
-.modal-options > label{
+.modal-options input,
+.modal-options label{
 	cursor: pointer;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+}
+.modal-options p {
+	margin: 0;
+}
+#milktea-sugar-slider {
+	width: 200px;
 }

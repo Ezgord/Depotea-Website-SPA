@@ -48,6 +48,8 @@ html {
 
 .cart-icon-container{
 	position: absolute;
+	top: 18%;
+	right: 6%;
 	height: 30px;
 	width: auto;
 	cursor: pointer;
@@ -63,8 +65,11 @@ html {
 }
 .cart-icon-container-open{
 	position: fixed;
+	top: 5.5%;
+	right: 10%;
 	height: 30px;
 	width: auto;
+	z-index: 100;
 	cursor: pointer;
 	transition: 0.35s ease;
 }
@@ -80,6 +85,8 @@ html {
 
 .fullnavBtn {
 	position: absolute;
+	top: 20%;
+	right: 10%;
 	height: 27px;
 	width: 35px;
 	cursor: pointer;
@@ -117,6 +124,8 @@ html {
 
 .fullnavBtn.active{
 	position: fixed;
+	top: 6%;
+	right: 14%;
 }
 .fullnavBtn.active .text{
 	color: #fff;
@@ -188,30 +197,35 @@ html {
 	transition: opacity 1s, visibility 1s, height 1s, border-radius 1s;
 }
 
-.fullnav .svg-pc{
+.fullnav .dropdown-divider-pc{
 	position: fixed;
     top: 50%;
     left: 50%;
+	display: block;
     transform: translate(-50%, -50%);
 }
-.fullnav .svg-mobile{
+.fullnav .dropdown-divider-mobile{
 	position: fixed;
     top: 50%;
     left: 50%;
+	display: none;
     transform: translate(-50%, -50%);
 }
 
-.fullnav.open .svg-pc{
-	animation: svgExpandVertical 2s ease;
+.fullnav.open .dropdown-divider-pc{
+	animation: dropdownDividerExpandVertical 2s ease;
 }
-.fullnav.open .svg-mobile{
-	animation: svgExpandHorizontal 2s ease;
+.fullnav.open .dropdown-divider-mobile{
+	animation: dropdownDividerExpandHorizontal 2s ease;
 }
 
 /* BEVERAGE ICON */
 
 .beverage-icon-wrapper{
-	position: fixed;
+	position: absolute;
+		top: 50%;
+		left: 30%;
+		transform: translate(-50%, -50%);
 	height: 478px;
 	width: 500px;
 	overflow: hidden;
@@ -232,10 +246,17 @@ html {
 	animation: beverageIconShake 1s ease infinite;
 }
 
+.fullnav.open .beverage-icon-container{
+	animation: slideLeftBeverageIcon 3s ease;
+}
+	
 /* FOOD ICON */
 
 .food-icon-wrapper{
-	position: fixed;
+	position: absolute;
+		top: 50%;
+		left: 70%;
+		transform: translate(-50%, -50%);
 	height: 478px;
 	width: 500px;
 	overflow: hidden;
@@ -271,12 +292,19 @@ html {
 	transform: rotate(-30deg);
 }
 
+.fullnav.open .food-icon-container{
+	animation: slideRightFoodIcon 3s ease;
+}
+
 /* FOODHUB ICON */
 
 .fh-icon-wrapper{
 	position: absolute;
+	top: 6%;
+	left: 6%;
 	height: 33px;
 	width: 144px;
+	z-index: 100;
 	overflow: hidden;
 	transition: 0.35s ease;
 }
@@ -481,57 +509,9 @@ footer span{
 	transform: scale(1.1);
 }
 
+/* TABLET */
 
-/* PC */
-
-@media only screen and (min-width: 768px) {
-	.fullnavBtn {
-		top: 20%;
-		right: 10%;
-	}
-	.fullnavBtn.active{
-		top: 6%;
-		right: 14%;
-	}
-	.cart-icon-container{
-		top: 18%;
-		right: 6%;
-	}
-	.cart-icon-container-open{
-		top: 5.5%;
-		right: 10%;
-	}
-	.fullnav .svg-pc{
-		display: block;
-	}
-	.fullnav .svg-mobile{
-		display: none;
-	}
-	.fh-icon-wrapper{
-		top: 6%;
-		left: 6%;
-	}
-	.beverage-icon-wrapper{
-		top: 50%;
-		left: 30%;
-		transform: translate(-50%, -50%);
-	}
-	.food-icon-wrapper{
-		top: 50%;
-		left: 70%;
-		transform: translate(-50%, -50%);
-		height: 478px;
-		width: 500px;
-	}
-	
-	/* ANIMATION */
-	
-	.fullnav.open .beverage-icon-container{
-		animation: slideLeftBeverageIcon 3s ease;
-	}
-	.fullnav.open .food-icon-container{
-		animation: slideRightFoodIcon 3s ease;
-	}
+@media only screen and (max-width: 768px) {
 }
 
 /* MOBILE */
@@ -562,10 +542,10 @@ footer span{
 		top: 12%;
 		right: 5%;
 	}
-	.fullnav .svg-pc{
+	.fullnav .dropdown-divider-pc{
 		display: none;
 	}
-	.fullnav .svg-mobile{
+	.fullnav .dropdown-divider-mobile{
 		display: block;
 	}
 	.fh-icon-wrapper{
@@ -658,12 +638,12 @@ footer span{
 
 /* NAVBAR MENU KEYFRAMES */
 
-@keyframes svgExpandVertical{
+@keyframes dropdownDividerExpandVertical{
 	0%	{height: 3%;}
 	50%	{height: 3%;}
 	100%{height: 80%;}
 }
-@keyframes svgExpandHorizontal{
+@keyframes dropdownDividerExpandHorizontal{
 	0%	{width: 2%;}
 	50%	{width: 2%;}
 	100%{width: 80%;}

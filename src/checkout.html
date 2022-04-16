@@ -1,14 +1,70 @@
 <div class="checkout-document">
-	<div class="checkout-wrapper">
+	<div class="checkout-wrapper mx-3">
 		<div class="checkout-container container-fluid row row-cols-1 row-cols-sm-2 justify-content-center m-0">
-			<div class="cart-wrapper col col-sm-7">
+			<div class="cart-wrapper col col-sm-8 d-flex justify-content-center align-items-center fs-1">
 				<div class="cart-container">
-					Test1
+					CART ITEMS GO HERE
 				</div>
 			</div>
-			<div class="form-wrapper col col-sm-4">
-				<div class="form-container">
-					Test2
+			<div class="checkout-form-wrapper col col-sm-3">
+				<div class="checkout-form-container m-3">
+					<div class="order-summary col">
+						<h3>Summary</h3>
+						<h6>Items:<span style="float: right;">69</span></h6>
+						<h6>Subtotal:<span style="float: right;">₱420</span></h6>
+						<h6 id="shipping-fee">Shipping Fee:<span style="float: right;">₱0</span></h6>
+						<hr class="my-1">
+						<h5 class="m-0">Total Price:<span style="float: right;">₱69,420</span></h5>
+					</div>
+					<hr>
+					<form id="checkout-form">
+						<div class="claim-option-container row text-center">
+							<h5>Claim Options</h5>
+							<div class="claim-options col-6">
+								<input name="claim-option" id="claim-delivery" type="radio" required oninput="claimOption()" oninvalid="alert('select claim option')">
+								<label for="claim-delivery">Delivery</label>
+							</div>
+							<div class="claim-options col-6">
+								<input name="claim-option" id="claim-pick-up" type="radio" oninput="claimOption()">
+								<label for="claim-pick-up">Pick-Up</label>
+							</div>
+						</div>
+						<hr>
+						<div class="payment-option-container row text-center">
+							<h5>Payment Options</h5>
+							<div class="payment-options col-6">
+								<input name="payment-option" id="payment-cod" type="radio" required disabled oninput="paymentOption()" oninvalid="alert('select payment option')">
+								<label style="color: #bbb;" for="payment-cod">COD</label>
+							</div>
+							<div class="payment-options col-6">
+								<input name="payment-option" id="payment-gcash" type="radio" disabled oninput="paymentOption()">
+								<label style="color: #bbb;" for="payment-gcash">GCash</label>
+							</div>
+						</div>
+						<hr>
+						<div class="client-info row text-center">
+							<div class="client-info-container col">
+								<h5>Client Info</h5>
+								<div class="client-input-container form-floating">
+									<input name="client-input" id="client-name-input" class="form-control" type="text" required placeholder="Joe Mama">
+									<label for="client-name-input">Name</label>
+								</div>
+								<div class="client-input-container form-floating">
+									<input name="client-input" id="client-contactno-input" class="form-control" type="tel" required maxlength="15" placeholder="(0912) 345-6789" onkeypress="contactNoFormat()">
+									<label for="client-contactno-input">Contact No.</label>
+								</div>
+								<div class="client-input-container form-floating">
+									<input name="client-input" id="client-email-input" class="form-control" type="email" placeholder="joemama69@example.com">
+									<label for="client-email-input">Email</label>
+								</div>
+								<div class="client-input-container form-floating">
+									<input name="client-input" id="client-address-input" class="form-control" type="text" required placeholder="123 Jeff Street, Brgy. 69">
+									<label for="client-address-input">Address</label>
+								</div>
+								<input class="btn btn-dark btn-lg fw-bold" value="Place Order" type="submit" onclick="$('#checkout-form').prop('class', 'was-validated')">
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>

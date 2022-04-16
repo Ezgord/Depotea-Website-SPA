@@ -85,6 +85,7 @@ function modalUpdate(selectedItem, selectedItemModal, productTitleRaw, productPr
 	$('#modal-span').text('');
 	$('#product-size-option input').prop('value', '0');
 	$('.product-sizes:eq(2)').hide();
+	$('.milktea-sugar-label').text('Sugar 0%');
 	$('#addon-natadecoco ~ label').text('₱15 - Nata De Coco');
 		// SET PRODUCT INFO
 	$('#modal-product-image').prop('src', productImage);
@@ -155,7 +156,7 @@ function modalProductMilkTea() {
 function modalProductFruitTea() {
 	$('.snacks-options').hide();
 	$('.ricemeals-options').hide();
-	$('.milktea-sugar-option').hide();
+	$('#milktea-sugar-option').hide();
 	$('.milktea-addons').hide();
 	
 	$("#modal-product-name").append('<span id="appended-title"> Fruit Tea</span>');
@@ -387,6 +388,11 @@ function quantityChange(quantityBtn) {
 	}
 	
 	$('#modal-product-quantity').val(newVal);
+}
+
+function milkTeaSugarSlider() {
+	var sugarLevel = $('#milktea-sugar-slider').val();
+	$('.milktea-sugar-label').text('Sugar ' + sugarLevel + '%');
 }
 	
 function productCalcTotalPrice() {
