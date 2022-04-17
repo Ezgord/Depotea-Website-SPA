@@ -17,7 +17,7 @@
 						<h5 class="m-0">Total Price:<span style="float: right;">₱69,420</span></h5>
 					</div>
 					<hr>
-					<form id="checkout-form">
+					<form id="checkout-form" autocomplete="off">
 						<div class="claim-option-container row text-center">
 							<h5>Claim Options</h5>
 							<div class="claim-options col-6">
@@ -46,15 +46,17 @@
 							<div class="client-info-container col">
 								<h5>Client Info</h5>
 								<div class="client-input-container form-floating">
-									<input name="client-input" id="client-name-input" class="form-control" type="text" required placeholder="Joe Mama">
+									<input name="client-input" id="client-name-input" class="form-control" type="text" required minlength="4" placeholder="Joe Mama">
 									<label for="client-name-input">Name</label>
 								</div>
 								<div class="client-input-container form-floating">
-									<input name="client-input" id="client-contactno-input" class="form-control" type="tel" required maxlength="15" placeholder="(0912) 345-6789" onkeypress="contactNoFormat()">
+									<input 	name="client-input" id="client-contactno-input" class="form-control" type="tel" required minlength="15" maxlength="15"
+											placeholder="(0912) 345-6789" pattern="[\(]\d{4}[\)][\s]\d{3}[\-]\d{4}" 
+											onkeypress="return event.charCode >= 48 && event.charCode <= 57" onkeyup="contactNoFormat(this)">
 									<label for="client-contactno-input">Contact No.</label>
 								</div>
 								<div class="client-input-container form-floating">
-									<input name="client-input" id="client-email-input" class="form-control" type="email" placeholder="joemama69@example.com">
+									<input name="client-input" id="client-email-input" class="form-control" type="email" autocomplete="on" placeholder="joemama69@example.com">
 									<label for="client-email-input">Email</label>
 								</div>
 								<div class="client-input-container form-floating">

@@ -94,10 +94,19 @@ function getModalDetails() {
 }
 
 /* CHECKOUT FORM */
+function getSubTotal() {
+	
+}
+
+function getTotalPrice(subTotal, shippingFee) {
+	return subTotal + shippingFee;
+}
 
 function claimOption() {
+	const shippingFee = 150;
+	
 	if ($('#claim-delivery').is(':checked')) {
-		$('#shipping-fee span').text('₱999');
+		$('#shipping-fee span').text('₱' + shippingFee);
 		
 		$('.payment-options > label').removeAttr("style");
 		
@@ -121,13 +130,18 @@ function claimOption() {
 function paymentOption() {
 }
 
-function contactNoFormat() {
-	var selection = window.getSelection().toString();
+function contactNoFormat(contactNoInput) {
+	var contactNoVal = $(contactNoInput).val();
+	var contactNoReplace = $(contactNoInput).val().replace(/\D/g,''); 
 	
-    if ( selection !== '' ) {
-        return;
-    }
-    if ( $.inArray( event.keyCode, [38,40,37,39] ) !== -1 ) {
-        return;
-    }
+	if ($(contactNoInput).val().length > 0) {
+		$(contactNoInput).val('(' + contactNoReplace.substring(0,4));
+	}
+	if ($(contactNoInput).val().length >= 5) {
+		$(contactNoInput).val($(contactNoInput).val() + ') ' + contactNoReplace.substring(4,7));
+	}
+	if ($(contactNoInput).val().length >= 10) {
+		$(contactNoInput).val($(contactNoInput).val() + '-' + contactNoReplace.substring(7,11)); 
+	}
+	
 }
