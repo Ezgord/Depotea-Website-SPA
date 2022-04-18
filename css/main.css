@@ -102,13 +102,14 @@ html {
 	animation: hamburgerIconTextOnLoad 1s ease;
 }
 .fullnavBtn .hamburger {
-	background: #000;
-	border: none;
-	height: 4px;
-	width: 100%;
 	position: absolute;
 	top: 0;
 	left: 0;
+	height: 4px;
+	width: 100%;
+	border: none;
+	border-radius: 10px;
+	background: #000;
 	cursor: pointer;
 	animation: hamburgerIconOnLoad 1s ease;
 }

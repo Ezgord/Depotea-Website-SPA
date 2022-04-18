@@ -90,7 +90,7 @@ input[name="radio-categories"]:checked ~ .category-label {
 	display: none;
 }
 #modal-wrapper{
-	padding: 0 0 10px;
+	padding-bottom: 10px;
 }
 .modal-container{
 	margin: 0;

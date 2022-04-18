@@ -31,7 +31,7 @@
 
 		<!-- MENU ITEM MODAL -->
 	<div class="modal fade" id="menu-item-modal" tabindex="-1" aria-labelledby="MenuItemModal" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-scrollable modal-lg">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
 			<div class="modal-content">
 				<div class="modal-header bg-dark">
 					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -178,7 +178,24 @@
 				</div>
 				<div class="modal-footer bg-dark">
 					<button type="button" class="btn btn-sm btn-outline-light" data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-light" onclick="addToCart()">Add to Cart</button>
+					<button type="button" class="btn btn-light" onclick="addToCart(this)">Add to Cart</button>
+				</div>
+			</div>
+		</div>
+	</div>
+		<!-- INVALID MODAL -->
+	<div class="modal fade" id="menu-modal-invalid" tabindex="-1" aria-labelledby="menuModalInvalid" aria-hidden="true">
+		<div class="menu-modal-invalid modal-dialog modal-dialog-centered modal-sm">
+			<div class="modal-content bg-dark">
+				<div class="modal-body">
+					<div class="row align-items-center">
+						<div class="col">
+							<p class="m-0" style="color: #fff;"></p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer border-0">
+					<button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>

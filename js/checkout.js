@@ -1,21 +1,6 @@
 
 /* LOAD PAGE AND MODAL */
 
-function loadCartModal() {
-	var xhttp = new XMLHttpRequest();
-	
-	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			document.getElementById("cart-modal-body").innerHTML = this.responseText;
-			$('.checkout-form-wrapper').remove();
-			$('.cart-wrapper.col-sm-8').toggleClass('col-sm-8 col-sm-12');
-		}
-	};
-	
-	xhttp.open("GET", "src/checkout.html", true);
-	xhttp.send();
-}
-
 function loadCheckout() {
 	var xhttp = new XMLHttpRequest();
 	
@@ -50,74 +35,36 @@ function loadCheckout() {
 
 /* MODALS */
 
-function addToCart() {
-	var menuItemModal = document.getElementById('menu-item-modal');
-	var modal = bootstrap.Modal.getInstance(menuItemModal);
-	
-	if (selectedItemSubCateg === "potato-fries") {
-		if (!$("[name='fries-flavor']:checked").val()) {
-			alert('no flavor selected');
-		}
-		else {
-			modal.hide();
-			getModalDetails();
-		}
-	}
-	else {
-		modal.hide();
-		getModalDetails();
-	}
-}
-
-function getModalDetails() {
-	var selectedSize = $("[name='product-size']:checked + label").text();
-	var selectedSugarLevel = $('#milktea-sugar-slider').val() + '%';
-	var selectedAddon = $("[name='beverage-addon']:checked + label").text();
-	var selectedFlavor = $("[name='fries-flavor']:checked + label").text();
-	var selectedRiceMealsOption = $("[name='ricemeals-option']:checked + label").text();
-	var productQuantity = $('#modal-product-quantity').val();
-	var modalTotalPrice = $('#modal-product-price').text();
-	var modalFinalPrice = parseInt(productQuantity * modalTotalPrice.slice(1));
-	
-	console.log('Category	: ' + selectedItemCateg.split('-')[0]);
-	console.log('SubCategory	: ' + selectedItemSubCateg);
-	console.log('Product		: ' + productTitle);
-	console.log('Base Price	: ' + productPrice);
-	console.log('Size		: ' + selectedSize);
-	console.log('Sugar		: ' + selectedSugarLevel);
-	console.log('Addon		: ' + selectedAddon);
-	console.log('Flavor		: ' + selectedFlavor);
-	console.log('RMOption	: ' + selectedRiceMealsOption);
-	console.log('Total Price	: ' + modalTotalPrice);
-	console.log('Quantity	: ' + productQuantity);
-	console.log('Final Price	: ₱' + modalFinalPrice);
-}
-
 /* CHECKOUT FORM */
+
 function getSubTotal() {
 	
 }
 
-function getTotalPrice(subTotal, shippingFee) {
-	return subTotal + shippingFee;
+function getTotalPrice(shippingFee) {
+	var cartSubTotal = parseInt($('#cart-subtotal').text().slice(1));
+	var totalPrice = cartSubTotal + shippingFee;
+	$('#cart-total-price').text('₱' + totalPrice);
 }
 
 function claimOption() {
-	const shippingFee = 150;
+	var shippingFee;
 	
 	if ($('#claim-delivery').is(':checked')) {
-		$('#shipping-fee span').text('₱' + shippingFee);
+		shippingFee = 30;
+		$('#shipping-fee').text('₱' + shippingFee);
 		
-		$('.payment-options > label').removeAttr("style");
+		$('.payment-methods > label').removeAttr("style");
 		
 		$('#payment-cod').prop('disabled', false);
 		
 		$('#payment-gcash').prop('disabled', false);
 	}
 	else {
-		$('#shipping-fee span').text('₱0');
+		shippingFee = 0;
+		$('#shipping-fee').text('₱' + shippingFee);
 		
-		$('.payment-options > label').removeAttr("style");
+		$('.payment-methods > label').removeAttr("style");
 		
 		$('#payment-cod').prop('disabled', true);
 		$('#payment-cod:disabled ~ label').css("color", "#bbb");
@@ -125,9 +72,19 @@ function claimOption() {
 		$('#payment-gcash').prop('disabled', false);
 		$('#payment-gcash').prop('checked', true);
 	}
+	
+	getTotalPrice(shippingFee);
 }
 
-function paymentOption() {
+function checkoutFormInvalid(invalidInput) {
+	$('#checkout-form-invalid').modal("show");
+	
+	if ($(invalidInput).is("[name='claim-option']")){
+		$('#checkout-form-invalid p').text('Please select a claiming option.');
+	}
+	else if ($(invalidInput).is("[name='payment-method']")){
+		$('#checkout-form-invalid p').text('Please select a payment method.');
+	}
 }
 
 function contactNoFormat(contactNoInput) {
@@ -143,5 +100,4 @@ function contactNoFormat(contactNoInput) {
 	if ($(contactNoInput).val().length >= 10) {
 		$(contactNoInput).val($(contactNoInput).val() + '-' + contactNoReplace.substring(7,11)); 
 	}
-	
 }

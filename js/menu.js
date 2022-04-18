@@ -394,6 +394,14 @@ function milkTeaSugarSlider() {
 	var sugarLevel = $('#milktea-sugar-slider').val();
 	$('.milktea-sugar-label').text('Sugar ' + sugarLevel + '%');
 }
+
+function menuModalInvalid() {
+	$('#menu-modal-invalid').modal("show");
+	
+	if (selectedItemSubCateg === 'potato-fries'){
+		$('#menu-modal-invalid p').text('Please select a flavor.');
+	}
+}
 	
 function productCalcTotalPrice() {
 	var productTotalPrice = productPrice;

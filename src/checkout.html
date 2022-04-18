@@ -1,27 +1,277 @@
 <div class="checkout-document">
 	<div class="checkout-wrapper mx-3">
 		<div class="checkout-container container-fluid row row-cols-1 row-cols-sm-2 justify-content-center m-0">
-			<div class="cart-wrapper col col-sm-8 d-flex justify-content-center align-items-center fs-1">
+			<div class="cart-wrapper col col-sm-8">
 				<div class="cart-container">
-					CART ITEMS GO HERE
+					<div class="cart-header row p-3 mb-4">
+						<div class="col-auto d-flex align-items-center">
+							<input id="cart-select-all" type="checkbox">
+						</div>
+						<div class="col d-flex align-items-center p-0 text-nowrap">
+							<label for="cart-select-all">Select All</label>
+						</div>
+						<div class="col-auto align-self-end p-0">
+							<button class="btn" type="button"><i class="fa-solid fa-trash-can"></i> Delete</button>
+						</div>
+					</div>
+					<div class="cart-items-container row">
+						<div class="cart-items col">
+							<div class="cart-item row mb-3">
+								<div class="col-auto d-flex align-items-center">
+									<div class="row-auto row-cols-1">
+										<div class="col d-flex justify-content-center">
+											<input class="my-3" type="checkbox">
+										</div>
+										<div class="col">
+											<button class="btn" type="button"><i class="fa-solid fa-trash-can"></i></button>
+										</div>
+									</div>
+								</div>
+								<div class="col-auto d-flex align-items-center p-0">
+									<img src="assets/img/products/fruittea/fruittea1.jpeg" style="object-fit: contain; height: 100px; width: auto;"/>
+								</div>
+								<div class="col">
+									<div class="row my-3">
+										<div class="col-12 col-sm d-flex justify-content-center align-items-stretch">
+											<div class="row row-cols-1">
+												<div class="col text-center d-flex justify-content-center align-items-center">
+													PRODUCT NAME
+												</div>
+												<div class="col text-center d-flex justify-content-center align-items-center">
+													PRODUCT DESCRIPTION
+												</div>
+											</div>
+										</div>
+										<div class="col-12 col-sm-auto d-flex justify-content-center align-items-center">
+											<div class="row-auto row-cols-1">
+												<div class="col text-center fw-bold">
+													<p>₱0</p>
+												</div>
+												<div class="quantity-btn-container col">
+													<button class="quantity-btn down btn btn-link px-2" onclick="quantityChangeCart('quantity-', this)">
+														<i class="fa-solid fa-circle-minus" style="color: #000;"></i>
+													</button>
+													
+													<input class="cart-product-quantity form-control-sm" type="number" value="1" min="1" max="9" disabled readonly>
+													
+													<button class="quantity-btn up btn btn-link px-2" onclick="quantityChangeCart('quantity+', this)">
+														<i class="fa-solid fa-circle-plus" style="color: #000;"></i>
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="cart-item row mb-3">
+								<div class="col-auto d-flex align-items-center">
+									<div class="row-auto row-cols-1">
+										<div class="col d-flex justify-content-center">
+											<input class="my-3" type="checkbox">
+										</div>
+										<div class="col">
+											<button class="btn" type="button"><i class="fa-solid fa-trash-can"></i></button>
+										</div>
+									</div>
+								</div>
+								<div class="col-auto d-flex align-items-center p-0">
+									<img src="assets/img/products/fruittea/fruittea1.jpeg" style="object-fit: contain; height: 100px; width: auto;"/>
+								</div>
+								<div class="col">
+									<div class="row my-3">
+										<div class="col-12 col-sm d-flex justify-content-center align-items-stretch">
+											<div class="row row-cols-1">
+												<div class="col text-center d-flex justify-content-center align-items-center">
+													PRODUCT NAME
+												</div>
+												<div class="col text-center d-flex justify-content-center align-items-center">
+													PRODUCT DESCRIPTION
+												</div>
+											</div>
+										</div>
+										<div class="col-12 col-sm-auto d-flex justify-content-center align-items-center">
+											<div class="row-auto row-cols-1">
+												<div class="col text-center fw-bold">
+													<p>₱0</p>
+												</div>
+												<div class="quantity-btn-container col">
+													<button class="quantity-btn down btn btn-link px-2" onclick="quantityChangeCart('quantity-', this)">
+														<i class="fa-solid fa-circle-minus" style="color: #000;"></i>
+													</button>
+													
+													<input class="cart-product-quantity form-control-sm" type="number" value="1" min="1" max="9" disabled readonly>
+													
+													<button class="quantity-btn up btn btn-link px-2" onclick="quantityChangeCart('quantity+', this)">
+														<i class="fa-solid fa-circle-plus" style="color: #000;"></i>
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="cart-item row mb-3">
+								<div class="col-auto d-flex align-items-center">
+									<div class="row-auto row-cols-1">
+										<div class="col d-flex justify-content-center">
+											<input class="my-3" type="checkbox">
+										</div>
+										<div class="col">
+											<button class="btn" type="button"><i class="fa-solid fa-trash-can"></i></button>
+										</div>
+									</div>
+								</div>
+								<div class="col-auto d-flex align-items-center p-0">
+									<img src="assets/img/products/fruittea/fruittea1.jpeg" style="object-fit: contain; height: 100px; width: auto;"/>
+								</div>
+								<div class="col">
+									<div class="row my-3">
+										<div class="col-12 col-sm d-flex justify-content-center align-items-stretch">
+											<div class="row row-cols-1">
+												<div class="col text-center d-flex justify-content-center align-items-center">
+													PRODUCT NAME
+												</div>
+												<div class="col text-center d-flex justify-content-center align-items-center">
+													PRODUCT DESCRIPTION
+												</div>
+											</div>
+										</div>
+										<div class="col-12 col-sm-auto d-flex justify-content-center align-items-center">
+											<div class="row-auto row-cols-1">
+												<div class="col text-center fw-bold">
+													<p>₱0</p>
+												</div>
+												<div class="quantity-btn-container col">
+													<button class="quantity-btn down btn btn-link px-2" onclick="quantityChangeCart('quantity-', this)">
+														<i class="fa-solid fa-circle-minus" style="color: #000;"></i>
+													</button>
+													
+													<input class="cart-product-quantity form-control-sm" type="number" value="1" min="1" max="9" disabled readonly>
+													
+													<button class="quantity-btn up btn btn-link px-2" onclick="quantityChangeCart('quantity+', this)">
+														<i class="fa-solid fa-circle-plus" style="color: #000;"></i>
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="cart-item row mb-3">
+								<div class="col-auto d-flex align-items-center">
+									<div class="row-auto row-cols-1">
+										<div class="col d-flex justify-content-center">
+											<input class="my-3" type="checkbox">
+										</div>
+										<div class="col">
+											<button class="btn" type="button"><i class="fa-solid fa-trash-can"></i></button>
+										</div>
+									</div>
+								</div>
+								<div class="col-auto d-flex align-items-center p-0">
+									<img src="assets/img/products/fruittea/fruittea1.jpeg" style="object-fit: contain; height: 100px; width: auto;"/>
+								</div>
+								<div class="col">
+									<div class="row my-3">
+										<div class="col-12 col-sm d-flex justify-content-center align-items-stretch">
+											<div class="row row-cols-1">
+												<div class="col text-center d-flex justify-content-center align-items-center">
+													PRODUCT NAME
+												</div>
+												<div class="col text-center d-flex justify-content-center align-items-center">
+													PRODUCT DESCRIPTION
+												</div>
+											</div>
+										</div>
+										<div class="col-12 col-sm-auto d-flex justify-content-center align-items-center">
+											<div class="row-auto row-cols-1">
+												<div class="col text-center fw-bold">
+													<p>₱0</p>
+												</div>
+												<div class="quantity-btn-container col">
+													<button class="quantity-btn down btn btn-link px-2" onclick="quantityChangeCart('quantity-', this)">
+														<i class="fa-solid fa-circle-minus" style="color: #000;"></i>
+													</button>
+													
+													<input class="cart-product-quantity form-control-sm" type="number" value="1" min="1" max="9" disabled readonly>
+													
+													<button class="quantity-btn up btn btn-link px-2" onclick="quantityChangeCart('quantity+', this)">
+														<i class="fa-solid fa-circle-plus" style="color: #000;"></i>
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="cart-item row mb-3">
+								<div class="col-auto d-flex align-items-center">
+									<div class="row-auto row-cols-1">
+										<div class="col d-flex justify-content-center">
+											<input class="my-3" type="checkbox">
+										</div>
+										<div class="col">
+											<button class="btn" type="button"><i class="fa-solid fa-trash-can"></i></button>
+										</div>
+									</div>
+								</div>
+								<div class="col-auto d-flex align-items-center p-0">
+									<img src="assets/img/products/fruittea/fruittea1.jpeg" style="object-fit: contain; height: 100px; width: auto;"/>
+								</div>
+								<div class="col">
+									<div class="row my-3">
+										<div class="col-12 col-sm d-flex justify-content-center align-items-stretch">
+											<div class="row row-cols-1">
+												<div class="col text-center d-flex justify-content-center align-items-center">
+													PRODUCT NAME PRODUCT NAME PRODUCT NAME PRODUCT NAME PRODUCT NAME 
+												</div>
+												<div class="col text-center d-flex justify-content-center align-items-center">
+													PRODUCT DESCRIPTION PRODUCT DESCRIPTION PRODUCT DESCRIPTION PRODUCT DESCRIPTION PRODUCT DESCRIPTION 
+												</div>
+											</div>
+										</div>
+										<div class="col-12 col-sm-auto d-flex justify-content-center align-items-center">
+											<div class="row-auto row-cols-1">
+												<div class="col text-center fw-bold">
+													<p>₱0</p>
+												</div>
+												<div class="quantity-btn-container col">
+													<button class="quantity-btn down btn btn-link px-2" onclick="quantityChangeCart('quantity-', this)">
+														<i class="fa-solid fa-circle-minus" style="color: #000;"></i>
+													</button>
+													
+													<input class="cart-product-quantity form-control-sm" type="number" value="1" min="1" max="9" disabled readonly>
+													
+													<button class="quantity-btn up btn btn-link px-2" onclick="quantityChangeCart('quantity+', this)">
+														<i class="fa-solid fa-circle-plus" style="color: #000;"></i>
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="checkout-form-wrapper col col-sm-3">
+				<!-- CHECKOUT FORM -->
+			<div class="checkout-form-wrapper col col-sm-3 mx-3">
 				<div class="checkout-form-container m-3">
 					<div class="order-summary col">
 						<h3>Summary</h3>
 						<h6>Items:<span style="float: right;">69</span></h6>
-						<h6>Subtotal:<span style="float: right;">₱420</span></h6>
-						<h6 id="shipping-fee">Shipping Fee:<span style="float: right;">₱0</span></h6>
+						<h6>Subtotal:<span id="cart-subtotal" style="float: right;">₱420</span></h6>
+						<h6>Shipping Fee:<span id="shipping-fee" style="float: right;">₱0</span></h6>
 						<hr class="my-1">
-						<h5 class="m-0">Total Price:<span style="float: right;">₱69,420</span></h5>
+						<h5 class="m-0">Total Price:<span id="cart-total-price" style="float: right;">₱0</span></h5>
 					</div>
 					<hr>
 					<form id="checkout-form" autocomplete="off">
 						<div class="claim-option-container row text-center">
-							<h5>Claim Options</h5>
+							<h5>Claim Option</h5>
 							<div class="claim-options col-6">
-								<input name="claim-option" id="claim-delivery" type="radio" required oninput="claimOption()" oninvalid="alert('select claim option')">
+								<input name="claim-option" id="claim-delivery" type="radio" required oninput="claimOption()" oninvalid="checkoutFormInvalid(this)">
 								<label for="claim-delivery">Delivery</label>
 							</div>
 							<div class="claim-options col-6">
@@ -30,15 +280,32 @@
 							</div>
 						</div>
 						<hr>
-						<div class="payment-option-container row text-center">
-							<h5>Payment Options</h5>
-							<div class="payment-options col-6">
-								<input name="payment-option" id="payment-cod" type="radio" required disabled oninput="paymentOption()" oninvalid="alert('select payment option')">
+						<div class="payment-method-container row text-center">
+							<h5>Payment Method</h5>
+							<div class="payment-methods col-6">
+								<input name="payment-method" id="payment-cod" type="radio" required disabled oninvalid="checkoutFormInvalid(this)">
 								<label style="color: #bbb;" for="payment-cod">COD</label>
 							</div>
-							<div class="payment-options col-6">
-								<input name="payment-option" id="payment-gcash" type="radio" disabled oninput="paymentOption()">
+							<div class="payment-methods col-6">
+								<input name="payment-method" id="payment-gcash" type="radio" disabled>
 								<label style="color: #bbb;" for="payment-gcash">GCash</label>
+							</div>
+						</div>
+							<!-- INVALID MODAL -->
+						<div class="modal fade" id="checkout-form-invalid" tabindex="-1" aria-labelledby="checkoutFormInvalid" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered modal-sm">
+								<div class="modal-content">
+									<div class="modal-body">
+										<div class="row align-items-center">
+											<div class="col">
+												<p class="m-0"></p>
+											</div>
+										</div>
+									</div>
+									<div class="modal-footer border-0">
+										<button type="button" class="btn btn-sm btn-dark" data-bs-dismiss="modal">Close</button>
+									</div>
+								</div>
 							</div>
 						</div>
 						<hr>
@@ -46,24 +313,24 @@
 							<div class="client-info-container col">
 								<h5>Client Info</h5>
 								<div class="client-input-container form-floating">
-									<input name="client-input" id="client-name-input" class="form-control" type="text" required minlength="4" placeholder="Joe Mama">
+									<input id="client-name-input" class="form-control" type="text" required minlength="4" placeholder="Joe Mama" onfocus="$('#checkout-form').prop('class', 'was-validated')">
 									<label for="client-name-input">Name</label>
 								</div>
 								<div class="client-input-container form-floating">
-									<input 	name="client-input" id="client-contactno-input" class="form-control" type="tel" required minlength="15" maxlength="15"
+									<input 	id="client-contactno-input" class="form-control" type="tel" required minlength="15" maxlength="15"
 											placeholder="(0912) 345-6789" pattern="[\(]\d{4}[\)][\s]\d{3}[\-]\d{4}" 
 											onkeypress="return event.charCode >= 48 && event.charCode <= 57" onkeyup="contactNoFormat(this)">
 									<label for="client-contactno-input">Contact No.</label>
 								</div>
 								<div class="client-input-container form-floating">
-									<input name="client-input" id="client-email-input" class="form-control" type="email" autocomplete="on" placeholder="joemama69@example.com">
+									<input id="client-email-input" class="form-control" type="email" autocomplete="on" placeholder="joemama69@example.com">
 									<label for="client-email-input">Email</label>
 								</div>
 								<div class="client-input-container form-floating">
-									<input name="client-input" id="client-address-input" class="form-control" type="text" required placeholder="123 Jeff Street, Brgy. 69">
-									<label for="client-address-input">Address</label>
+									<input id="client-address-input" class="form-control" type="text" required minlength="6" placeholder="123 Jeff Street, Brgy. 69">
+									<label for="client-address-input">Shipping Address</label>
 								</div>
-								<input class="btn btn-dark btn-lg fw-bold" value="Place Order" type="submit" onclick="$('#checkout-form').prop('class', 'was-validated')">
+								<input class="btn btn-dark btn-lg fw-bold" value="Place Order" type="submit">
 							</div>
 						</div>
 					</form>
