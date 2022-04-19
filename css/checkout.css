@@ -12,6 +12,12 @@
 	border-radius: 20px;
 }
 
+	/* SUMMARY */
+	
+.order-summary h6{
+	color: #666;
+}
+
 	/* CLAIM OPTION */
 	
 .claim-options {
@@ -32,7 +38,7 @@
 	background: #eee;
 }
 input[name="claim-option"]:checked ~ label {
-	background: #444;
+	background: #212529;
 	color: #fff;
 }
 .claim-options input {
@@ -67,7 +73,7 @@ input[name="claim-option"]:checked ~ label {
 	background: #eee;
 }
 input[name="payment-method"]:checked ~ label {
-	background: #444;
+	background: #212529;
 	color: #fff;
 }
 .payment-methods input {

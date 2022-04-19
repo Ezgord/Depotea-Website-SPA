@@ -1,4 +1,9 @@
 
+function clearLocalStorage() {
+	localStorage.clear();
+	checkCartLocalStorage();
+}
+
 //HAMBURGER MENU TOGGLER
 
 $(function () {
@@ -11,25 +16,24 @@ $(function () {
 		$(".fullnavBtn").removeClass("active");
 		$("#fullnav").removeClass("open");
 	});
+		//INITIAL LOAD
+	var xhttp = new XMLHttpRequest();
+
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			document.getElementById("index-body-container").innerHTML = this.responseText;
+			loadCartModal();
+		}
+	};
+
+	xhttp.open("GET", "src/mainpage.html", true);
+	xhttp.send();
 });
 
 //VIDEO SLIDESHOW data-bs-toggle="modal" data-bs-target="#menu-item-modal"
 
 
 //AJAX PAGE LOADER
-
-var xhttp = new XMLHttpRequest();
-
-xhttp.onreadystatechange = function() {
-	if (this.readyState == 4 && this.status == 200) {
-		document.getElementById("index-body-container").innerHTML = this.responseText;
-		
-		loadCheckout();
-	}
-};
-
-xhttp.open("GET", "src/mainpage.html", true);
-xhttp.send();
 
 function loadMainPage() {
 	var xhttp = new XMLHttpRequest();

@@ -1,5 +1,5 @@
 
-/* LOAD PAGE AND MODAL */
+/* LOAD PAGE */
 
 function loadCheckout() {
 	var xhttp = new XMLHttpRequest();
@@ -9,6 +9,9 @@ function loadCheckout() {
 			document.getElementById("index-body-container").innerHTML = this.responseText;
 			$('.cart-icon-container').hide();
 			$('.cart-icon-container-open').hide();
+			$('#cart-modal-body').empty();
+			checkCartLocalStorage();
+			getCartItemCount();
 			
 			const targetNode = document.getElementById('index-body-container');
 			const config = { childList: true };
@@ -20,6 +23,7 @@ function loadCheckout() {
 					if (oldValue !== newValue) {
 						$('.cart-icon-container').show();
 						$('.cart-icon-container-open').show();
+						loadCartModal();
 						observer.disconnect();
 					}
 				});
@@ -33,9 +37,18 @@ function loadCheckout() {
 	xhttp.send();
 }
 
+function initCheckout() {
+}
+
 /* MODALS */
 
 /* CHECKOUT FORM */
+
+function getCartItemCount() {
+	var cartItemCount = $('.cart-items').find('.cart-item').length;
+	$('#cart-item-count').text(cartItemCount);
+	$('.cart-header-item-count').text(cartItemCount);
+}
 
 function getSubTotal() {
 	
@@ -55,6 +68,7 @@ function claimOption() {
 		$('#shipping-fee').text('₱' + shippingFee);
 		
 		$('.payment-methods > label').removeAttr("style");
+		$('[name="payment-method"]').prop("checked", false);
 		
 		$('#payment-cod').prop('disabled', false);
 		
@@ -65,12 +79,12 @@ function claimOption() {
 		$('#shipping-fee').text('₱' + shippingFee);
 		
 		$('.payment-methods > label').removeAttr("style");
+		$('[name="payment-method"]').prop("checked", false);
 		
 		$('#payment-cod').prop('disabled', true);
 		$('#payment-cod:disabled ~ label').css("color", "#bbb");
 			
 		$('#payment-gcash').prop('disabled', false);
-		$('#payment-gcash').prop('checked', true);
 	}
 	
 	getTotalPrice(shippingFee);
