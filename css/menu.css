@@ -12,6 +12,10 @@
 	text-shadow: 3px 4px #ccc;
 	white-space: nowrap;
 	
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	
 	cursor: pointer;
 	border-radius: 20px;
 	box-shadow: 0 3px 5px 3px #ccc;

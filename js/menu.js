@@ -81,7 +81,6 @@ function modalUpdate(selectedItem, selectedItemModal, productTitleRaw, productPr
 	$('#menu-item-modal').find('form').trigger('reset');
 	$('#modal-wrapper *').show();
 	$('#modal-wrapper input').prop('disabled', false);
-	$('#appended-title').remove();
 	$('#modal-span').text('');
 	$('#product-size-option input').prop('value', '0');
 	$('.product-sizes:eq(2)').hide();
@@ -117,13 +116,10 @@ function modalProductMilkTea() {
 	$('.ricemeals-options').hide();
 	$('.fruittea-addons').hide();
 	
-	$("#modal-product-name").append('<span id="appended-title"> Milk Tea</span>');
+	$('#modal-product-name').text(productTitle + ' Milk Tea');
 	$('#modal-span').text('(Pearls Included)');
-	$("#product-size-option > h5").text('Large Size Only');
 	
 	if (selectedItemSubCateg === 'classic-milktea') {
-		$("#product-size-option > h5").text('Size:');
-		
 		$("#product-size1 + label").text('₱70 - Medium');
 		$("#product-size1").prop('checked', true);
 		
@@ -159,8 +155,7 @@ function modalProductFruitTea() {
 	$('#milktea-sugar-option').hide();
 	$('.milktea-addons').hide();
 	
-	$("#modal-product-name").append('<span id="appended-title"> Fruit Tea</span>');
-	$("#product-size-option > h5").text('Large Size Only');
+	$('#modal-product-name').text(productTitle + ' Fruit Tea');
 	
 	if (selectedItemSubCateg === 'classic-fruittea') {
 		$('#modal-span').text('(Nata De Coco Included)');
@@ -188,15 +183,13 @@ function modalProductFruitTea() {
 		$("#product-size2").prop('checked', true);
 	}
 	else if (selectedItemSubCateg === 'lemon-juice') {
-		$("#modal-product-name").append('<span id="appended-title"> Juice</span>');
+		$('#modal-product-name').text(productTitle + ' Juice');
 		
 		if (productPrice == 70) {
-			$("#product-size-option > h5").text('Size:');
-			
-			$("#product-size1 + label").text('₱70 Medium');
+			$("#product-size1 + label").text('₱70 - Medium');
 			$("#product-size1").prop('checked', true);
 			
-			$("#product-size2 + label").text('₱80 Large');
+			$("#product-size2 + label").text('₱80 - Large');
 			$("#product-size2").prop('value', '10');
 		}
 		else if (productPrice == 80) {
@@ -215,7 +208,7 @@ function modalProductFruitTea() {
 		}
 	}
 	else if (selectedItemSubCateg === 'yakult-series') {
-		$("#modal-product-name").append('<span id="appended-title"> Yakult</span>');
+		$('#modal-product-name').text(productTitle + ' Yakult');
 		$('#modal-span').text('(Nata De Coco Included)');
 		$('#addon-natadecoco ~ label').text('₱15 - Extra Nata De Coco');
 		
@@ -232,8 +225,6 @@ function modalProductSnacks() {
 	$('.beverage-options').hide();
 	$('.snacks-options').hide();
 	$('.ricemeals-options').hide();
-	
-	$("#product-size-option > h5").text('Size:');
 	
 	if (selectedItemSubCateg === 'toasted-bread') {
 		$('.general-options').show();

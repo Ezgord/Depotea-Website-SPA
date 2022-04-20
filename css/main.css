@@ -17,6 +17,13 @@ html {
     scroll-behavior: smooth;
 }
 
+::selection {
+  background: #ccc; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: #ccc; /* Gecko Browsers */
+}
+
 /* HEADER */
 
 .header-section{

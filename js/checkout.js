@@ -11,7 +11,6 @@ function loadCheckout() {
 			$('.cart-icon-container-open').hide();
 			$('#cart-modal-body').empty();
 			checkCartLocalStorage();
-			getCartItemCount();
 			
 			const targetNode = document.getElementById('index-body-container');
 			const config = { childList: true };
@@ -37,24 +36,33 @@ function loadCheckout() {
 	xhttp.send();
 }
 
-function initCheckout() {
-}
-
-/* MODALS */
-
 /* CHECKOUT FORM */
 
-function getCartItemCount() {
-	var cartItemCount = $('.cart-items').find('.cart-item').length;
-	$('#cart-item-count').text(cartItemCount);
-	$('.cart-header-item-count').text(cartItemCount);
-}
-
-function getSubTotal() {
+function getQuantityCount() {
+	var cartItemsLength = $('.cart-item').length;
+	var itemQuantityTotal = 0;
 	
+	for (var i = 0; i < cartItemsLength; i++) {
+		var itemQuantity = parseInt($($('.cart-product-quantity')[i]).val());
+		itemQuantityTotal += itemQuantity;
+	}
+	
+	$('#checkout-form-cart-quantity').text(itemQuantityTotal);
 }
 
-function getTotalPrice(shippingFee) {
+function getCartSubTotal() {
+	var cartItemsLength = $('.cart-item').length;
+	var subTotal = 0;
+	
+	for (var i = 0; i < cartItemsLength; i++) {
+		var cartItemsPrice = parseInt($($('.cart-item-price')[i]).text().slice(1));
+		subTotal += cartItemsPrice;
+	}
+	
+	$('#cart-subtotal').text('₱' + subTotal);
+}
+
+function addShippingFee(shippingFee) {
 	var cartSubTotal = parseInt($('#cart-subtotal').text().slice(1));
 	var totalPrice = cartSubTotal + shippingFee;
 	$('#cart-total-price').text('₱' + totalPrice);
@@ -87,7 +95,7 @@ function claimOption() {
 		$('#payment-gcash').prop('disabled', false);
 	}
 	
-	getTotalPrice(shippingFee);
+	addShippingFee(shippingFee);
 }
 
 function checkoutFormInvalid(invalidInput) {

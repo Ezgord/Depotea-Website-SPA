@@ -5,13 +5,13 @@
 				<div class="cart-container">
 					<div class="cart-header row p-3 mb-3 bg-dark text-light">
 						<div class="col-auto d-flex align-items-center">
-							<input id="cart-select-all" type="checkbox">
+							<input id="cart-select-all" type="checkbox" oninput="selectAllCartItem(this)">
 						</div>
 						<div class="col d-flex align-items-center p-0 text-nowrap">
 							<label for="cart-select-all">Select All <span class="align-top" style="font-size: 0.8em;">(<span class="cart-header-item-count align-top"></span> Items)</span></label>
 						</div>
 						<div class="col-auto align-self-end p-0">
-							<button class="btn text-light" type="button"><i class="fa-solid fa-trash-can"></i> Delete</button>
+							<button class="btn text-light" type="button" title="Delete Selected Items" onclick="deleteSelectedCartItem()"><i class="fa-solid fa-trash-can"></i> Delete</button>
 						</div>
 					</div>
 					<div class="cart-items-container row">
@@ -25,7 +25,7 @@
 				<div class="checkout-form-container m-3">
 					<div class="order-summary col">
 						<h3>Summary</h3>
-						<h6>Items:<span id="cart-item-count" style="float: right;"></span></h6>
+						<h6>Items:<span id="checkout-form-cart-quantity" style="float: right;"></span></h6>
 						<h6>Subtotal:<span id="cart-subtotal" style="float: right;">₱420</span></h6>
 						<h6>Shipping Fee:<span id="shipping-fee" style="float: right;">₱0</span></h6>
 						<hr class="my-1">
