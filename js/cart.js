@@ -105,55 +105,58 @@ function getModalDetails() {
 }
 	
 function addMilkTeaToCart(productImage, productTitle, selectedSize, selectedSugarLevel, selectedAddon, productQuantity, modalTotalPrice) {
-	var cartItem = `
-		<div class="cart-item row mb-3">
-			<div class="col-auto d-flex align-items-center">
-				<div class="row-auto row-cols-1">
-					<div class="col d-flex justify-content-center">
-						<input class="my-3" type="checkbox">
-					</div>
-					<div class="col">
-						<button class="btn" type="button" onclick="removeCartItem(this)"><i class="fa-solid fa-trash-can"></i></button>
-					</div>
-				</div>
-			</div>
-			<div class="col-auto d-flex align-items-center p-0">
-				<img src="${productImage}" style="object-fit: contain; height: 100px; width: auto;"/>
+	var productBasePrice = modalTotalPrice;
+	var cartProductPrice = productBasePrice * productQuantity;
+	
+	var cartItem =
+`<div class="cart-item row mb-3">
+	<div class="col-auto d-flex align-items-center">
+		<div class="row-auto row-cols-1">
+			<div class="col d-flex justify-content-center">
+				<input class="my-3" type="checkbox">
 			</div>
 			<div class="col">
-				<div class="row my-3">
-					<div class="col-12 col-sm d-flex justify-content-center align-items-stretch">
-						<div class="row row-cols-1">
-							<div class="col text-center d-flex justify-content-center align-items-center">
-								<span id="cart-item-product-name">${productTitle}</span>
-							</div>
-							<div class="col text-center text-secondary d-flex justify-content-center align-items-center">
-								<span id="cart-item-product-desc">${selectedSize + ' - ' + selectedSugarLevel + ' Sugar ' + selectedAddon}</span>
-							</div>
-						</div>
+				<button class="btn" type="button" onclick="removeCartItem(this)"><i class="fa-solid fa-trash-can"></i></button>
+			</div>
+		</div>
+	</div>
+	<div class="col-auto d-flex align-items-center p-0">
+		<img src="${productImage}" style="object-fit: contain; height: 100px; width: auto;"/>
+	</div>
+	<div class="col">
+		<div class="row my-3">
+			<div class="col-12 col-sm d-flex justify-content-center align-items-stretch">
+				<div class="row row-cols-1">
+					<div class="col text-center d-flex justify-content-center align-items-center">
+						<span id="cart-item-product-name">${productTitle}</span>
 					</div>
-					<div class="col-12 col-sm-auto d-flex justify-content-center align-items-center">
-						<div class="row-auto row-cols-1">
-							<div class="col text-center fw-bold">
-								<p>${'₱' + modalTotalPrice}</p>
-							</div>
-							<div class="quantity-btn-container col">
-								<button class="quantity-btn down btn btn-link px-2" onclick="quantityChangeCart('quantity-', this)">
-									<i class="fa-solid fa-circle-minus" style="color: #000;"></i>
-								</button>
-								
-								<input class="cart-product-quantity form-control-sm" type="number" value="${productQuantity}" min="1" max="9" disabled readonly>
-								
-								<button class="quantity-btn up btn btn-link px-2" onclick="quantityChangeCart('quantity+', this)">
-									<i class="fa-solid fa-circle-plus" style="color: #000;"></i>
-								</button>
-							</div>
-						</div>
+					<div class="col text-center text-secondary d-flex justify-content-center align-items-center">
+						<span id="cart-item-product-desc">${selectedSize + ' - ' + selectedSugarLevel + ' Sugar ' + selectedAddon}</span>
 					</div>
 				</div>
 			</div>
-		</div>`;
-		
+			<div class="col-12 col-sm-auto d-flex justify-content-center align-items-center">
+				<div class="row-auto row-cols-1">
+					<div class="col text-center fw-bold">
+						<p class="cart-item-price">${'₱' + cartProductPrice}</p>
+					</div>
+					<div class="quantity-btn-container col">
+						<button class="quantity-btn down btn btn-link px-2" onclick="quantityChangeCart('quantity-', this)">
+							<i class="fa-solid fa-circle-minus" style="color: #000;"></i>
+						</button>
+						
+						<input class="cart-product-quantity form-control-sm" type="number" value="${productQuantity}">
+						
+						<button class="quantity-btn up btn btn-link px-2" onclick="quantityChangeCart('quantity+', this)">
+							<i class="fa-solid fa-circle-plus" style="color: #000;"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>`;
+	
 	$('.cart-items').append(cartItem);
 	saveCartItems();
 }
@@ -176,12 +179,17 @@ function quantityChangeCart(quantityBtn, thisQuantity) {
 	var oldVal = $(thisQuantity).closest('.quantity-btn-container').find('.cart-product-quantity').val();
 	var newVal;
 	
+	var cartItemPrice = parseInt($(thisQuantity).closest('.row-auto').find('.cart-item-price').text().slice(1));
+	var productQuantity2 = $(thisQuantity).closest('.quantity-btn-container').find('.cart-product-quantity').val();
+	var productBasePrice = cartItemPrice / productQuantity2;
+	
 	if (quantityBtn == 'quantity-') {
 		if (oldVal <= 1) {
 			newVal = 1;
 		}
 		else {
 			newVal = parseInt(oldVal) - 1;
+			cartItemPrice = cartItemPrice - productBasePrice;
 		}
 	}
 	else {
@@ -190,8 +198,12 @@ function quantityChangeCart(quantityBtn, thisQuantity) {
 		}
 		else {
 			newVal = parseInt(oldVal) + 1;
+			cartItemPrice = cartItemPrice + productBasePrice;
 		}
 	}
+	//document.getElementsByClassName("cart-product-quantity").value = newVal;
 	
-	$(thisQuantity).closest('.quantity-btn-container').find('.cart-product-quantity').val(newVal);
+	$(thisQuantity).closest('.quantity-btn-container').find('.cart-product-quantity').attr('value', newVal);
+	$(thisQuantity).closest('.row-auto').find('.cart-item-price').text('₱' + cartItemPrice);
+	saveCartItems();
 }
