@@ -10,6 +10,9 @@
 
 .cart-header {
 	box-shadow: 0 2px 3px 1px #ddd;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
 }
 .cart-item {
 	box-shadow: 0 2px 3px 1px #ddd;
