@@ -62,9 +62,11 @@ function getCartSubTotal() {
 	$('#cart-subtotal').text('₱' + subTotal);
 }
 
-function addShippingFee(shippingFee) {
-	var cartSubTotal = parseInt($('#cart-subtotal').text().slice(1));
-	var totalPrice = cartSubTotal + shippingFee;
+function getTotalPrice() {
+	var subTotal = parseInt($('#cart-subtotal').text().slice(1));
+	var shippingFee = parseInt($('#shipping-fee').text().slice(1));
+	var totalPrice = subTotal + shippingFee;
+	
 	$('#cart-total-price').text('₱' + totalPrice);
 }
 
@@ -95,7 +97,7 @@ function claimOption() {
 		$('#payment-gcash').prop('disabled', false);
 	}
 	
-	addShippingFee(shippingFee);
+	getTotalPrice();
 }
 
 function checkoutFormInvalid(invalidInput) {

@@ -16,8 +16,9 @@ function checkCartLocalStorage() {
 		localStorage.clear();
 	}
 	getCartItemCount();
-	getCartSubTotal();
 	getQuantityCount();
+	getCartSubTotal();
+	getTotalPrice();
 }
 
 function loadCartModal() {
@@ -480,8 +481,8 @@ function selectCartItem() {
 function deleteSelectedCartItem() {
 	if ($("[name='cart-item-checkbox']").is(':checked')) {
 		$("[name='cart-item-checkbox']:checked").closest('.cart-item').remove();
+		saveCartItems();
 	}
-	saveCartItems();
 }
 
 function removeCartItem(thisCartItem) {
