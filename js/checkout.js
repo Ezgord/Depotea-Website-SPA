@@ -36,7 +36,7 @@ function loadCheckout() {
 	xhttp.send();
 }
 
-/* CHECKOUT FORM */
+/* SUMMARY */
 
 function getQuantityCount() {
 	var cartItemsLength = $('.cart-item').length;
@@ -69,6 +69,8 @@ function getTotalPrice() {
 	
 	$('#cart-total-price').text('₱' + totalPrice);
 }
+
+/* CHECKOUT FORM */
 
 function claimOption() {
 	var shippingFee;
@@ -109,12 +111,20 @@ function checkoutFormInvalid(invalidInput) {
 	else if ($(invalidInput).is("[name='payment-method']")){
 		$('#checkout-form-invalid p').text('Please select a payment method.');
 	}
+	else if (invalidInput === 'lowOrder'){
+		$('#checkout-form-invalid p').html('Please have a minimum order worth <strong>₱150</strong>.');
+	}
+	else if (invalidInput === 'tempSubmitSuccess') {
+		$('#checkout-form-invalid p').html('<strong>ORDER PLACED</strong>');
+	}
 }
 
 function contactNoFormat(contactNoInput) {
-	var contactNoVal = $(contactNoInput).val();
 	var contactNoReplace = $(contactNoInput).val().replace(/\D/g,''); 
 	
+	if ($(contactNoInput).val() === '(') {
+		$(contactNoInput).val('');
+	}
 	if ($(contactNoInput).val().length > 0) {
 		$(contactNoInput).val('(' + contactNoReplace.substring(0,4));
 	}
@@ -123,5 +133,33 @@ function contactNoFormat(contactNoInput) {
 	}
 	if ($(contactNoInput).val().length >= 10) {
 		$(contactNoInput).val($(contactNoInput).val() + '-' + contactNoReplace.substring(7,11)); 
+	}
+}
+
+function submitCheckoutForm() {
+	var $totalPrice = parseInt($('#cart-total-price').text().slice(1));
+	var $checkoutForm = document.getElementById('checkout-form');
+	
+	if ($totalPrice >= 150) {
+		if ($checkoutForm.checkValidity()){
+			checkoutFormInvalid('tempSubmitSuccess');
+			localStorage.removeItem('savedCartItems');
+			checkCartLocalStorage();
+				//modify this block to ajax data to php
+			$('#checkout-form').submit( function(e){
+				e.preventDefault(); //prevent page reload
+				//flow ends here
+			});
+		}
+		else {
+			$('[name="claim-option"]').show();
+			$('[name="payment-method"]').show();
+			$checkoutForm.reportValidity();
+			$('[name="claim-option"]').hide();
+			$('[name="payment-method"]').hide();
+		}
+	}
+	else {
+		checkoutFormInvalid('lowOrder');
 	}
 }

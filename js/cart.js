@@ -2,7 +2,8 @@
 // ONLOAD FUNCTIONS
 
 function checkCartLocalStorage() {
-	if (localStorage.length === 0) {
+	//localStorage.length === 0
+	if (!localStorage.getItem('savedCartItems')) {
 		$('.cart-items').html('<p class="no-items">NO ITEMS</p>');
 	}
 	else {
@@ -13,7 +14,7 @@ function checkCartLocalStorage() {
 	}
 	if ($('.cart-item').length === 0) {
 		$('.cart-items').html('<p class="no-items">NO ITEMS</p>');
-		localStorage.clear();
+		localStorage.removeItem('savedCartItems');
 	}
 	getCartItemCount();
 	getQuantityCount();
@@ -71,12 +72,12 @@ function getModalDetails() {
 	if (selectedAddon === '') {
 	}
 	else {
-		selectedAddon = '| ' + selectedAddon;
+		selectedAddon = '• ' + selectedAddon;
 	}
 	if (selectedFlavor === '') {
 	}
 	else {
-		selectedFlavor = '| ' + selectedFlavor;
+		selectedFlavor = '• ' + selectedFlavor;
 	}
 	/*
 	console.log('Category	: ' + selectedItemCateg.split('-')[0]);
@@ -146,7 +147,7 @@ function addMilkTeaToCart(productImage, productTitle, selectedSize, selectedSuga
 						<span id="cart-item-product-name">${productTitle}</span>
 					</div>
 					<div class="col text-center text-secondary d-flex justify-content-center align-items-center">
-						<span id="cart-item-product-desc">${selectedSize + ' | ' + selectedSugarLevel + ' Sugar ' + selectedAddon}</span>
+						<span id="cart-item-product-desc">${selectedSize + ' • ' + selectedSugarLevel + ' Sugar ' + selectedAddon}</span>
 					</div>
 				</div>
 			</div>

@@ -40,7 +40,7 @@
 								<label for="claim-delivery">Delivery</label>
 							</div>
 							<div class="claim-options col-6">
-								<input name="claim-option" id="claim-pick-up" type="radio" oninput="claimOption()">
+								<input name="claim-option" id="claim-pick-up" type="radio" required oninput="claimOption()" oninvalid="checkoutFormInvalid(this)">
 								<label for="claim-pick-up">Pick-Up</label>
 							</div>
 						</div>
@@ -52,7 +52,7 @@
 								<label style="color: #bbb;" for="payment-cod">COD</label>
 							</div>
 							<div class="payment-methods col-6">
-								<input name="payment-method" id="payment-gcash" type="radio" disabled>
+								<input name="payment-method" id="payment-gcash" type="radio" required disabled oninvalid="checkoutFormInvalid(this)">
 								<label style="color: #bbb;" for="payment-gcash">GCash</label>
 							</div>
 						</div>
@@ -63,12 +63,9 @@
 									<div class="modal-body">
 										<div class="row align-items-center">
 											<div class="col">
-												<p class="m-0"></p>
+												<p class="m-0 text-center"></p>
 											</div>
 										</div>
-									</div>
-									<div class="modal-footer border-0">
-										<button type="button" class="btn btn-sm btn-dark" data-bs-dismiss="modal">Close</button>
 									</div>
 								</div>
 							</div>
@@ -95,7 +92,7 @@
 									<input id="client-address-input" class="form-control" type="text" required minlength="6" placeholder="123 Jeff Street, Brgy. 69">
 									<label for="client-address-input">Shipping Address</label>
 								</div>
-								<input class="btn btn-dark btn-lg fw-bold" value="Place Order" type="submit">
+								<input class="btn btn-dark btn-lg fw-bold" value="Place Order" type="button" onclick="submitCheckoutForm()">
 							</div>
 						</div>
 					</form>
