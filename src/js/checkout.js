@@ -80,7 +80,10 @@ function checkoutFormAlert(input) {
 }
 
 function contactNoFormat(contactNoInput) {
-	var contactNoReplace = $(contactNoInput).val().replace(/\D/g,''); 
+	$('#client-contactno-input').on('keypress', function (e) {
+		 return e.charCode >= 48 && e.charCode <= 57;
+	});
+	var contactNoReplace = $(contactNoInput).val().replace(/\D/g,'');
 	
 	if ($(contactNoInput).val() === '(') {
 		$(contactNoInput).val('');

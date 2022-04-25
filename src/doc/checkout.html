@@ -91,13 +91,15 @@
 							<div class="client-info-container col">
 								<h5>Client Info</h5>
 								<div class="client-input-container form-floating">
-									<input id="client-name-input" class="form-control" type="text" required minlength="4" placeholder="Joe Mama" onfocus="$('#checkout-form').prop('class', 'was-validated')">
+									<input 	id="client-name-input" class="form-control" type="text" required placeholder="Joe Mama" title="Enter first & last name"
+											pattern="^([A-Za-zÀ-ž]{2,}( [A-Za-zÀ-ž]{2,}))*$" 
+											onfocus="$('#checkout-form').prop('class', 'was-validated')">
 									<label for="client-name-input">Name</label>
 								</div>
 								<div class="client-input-container form-floating">
-									<input 	id="client-contactno-input" class="form-control" type="tel" required minlength="15" maxlength="15"
-											placeholder="(0912) 345-6789" pattern="[\(]\d{4}[\)][\s]\d{3}[\-]\d{4}" 
-											onkeypress="return event.charCode >= 48 && event.charCode <= 57" onkeyup="contactNoFormat(this)">
+									<input 	id="client-contactno-input" class="form-control" type="tel" required minlength="15" maxlength="15" placeholder="(0912) 345-6789" 
+											pattern="[\(]\d{4}[\)][\s]\d{3}[\-]\d{4}" 
+											onfocus="contactNoFormat(this)" onkeypress="contactNoFormat(this)">
 									<label for="client-contactno-input">Contact No.</label>
 								</div>
 								<div class="client-input-container form-floating">
@@ -105,7 +107,8 @@
 									<label for="client-email-input">Email</label>
 								</div>
 								<div class="client-input-container form-floating">
-									<input id="client-address-input" class="form-control" type="text" required minlength="6" placeholder="123 Jeff Street, Brgy. 69">
+									<input 	id="client-address-input" class="form-control" type="text" minlength="6" required placeholder="123 Jeff Street, Brgy. 69" title="No double spaces & unnecessary symbols"
+											pattern="^[\wÀ-ž]+( [\wÀ-ž-,\.\x27]+)*$">
 									<label for="client-address-input">Shipping Address</label>
 								</div>
 								<input class="btn btn-dark btn-lg fw-bold" value="Place Order" type="button" onclick="submitCheckoutForm()">
